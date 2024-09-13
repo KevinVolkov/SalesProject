@@ -11,7 +11,7 @@ body, h1, h2, p, ul {
     background-color: #f4f4f4;
   }
   
-  /* Header styles */
+  /* Header styles */ 
   header {
     background: #333;
     color: #fff;
@@ -19,7 +19,7 @@ body, h1, h2, p, ul {
     text-align: center;
   }
   
-  header h1 {
+  header h1 {   
     margin: 0;
   }
   
@@ -62,7 +62,11 @@ body, h1, h2, p, ul {
     padding: 20px;
     text-align: center;
     width: 200px;
-  }
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
   
   .product img {
     max-width: 100%;
