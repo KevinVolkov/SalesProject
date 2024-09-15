@@ -1,0 +1,12 @@
+#gitignore is a file that tells git which files and folders to ignore in a project. 
+#It is used to avoid committing files that are not necessary for the project. 
+# This file should be placed in the root directory of the project.
+# Ignore environment variable files so they don't get committed because they contain sensitive information
+.env
+
+# Ignore node_modules directory
+node_modules/
+
+# Ignore log files
+*.log
+ 
