@@ -1,5 +1,5 @@
 //Kevin Volkov: This is the main app.js file which start everything: connects to DB, etc ....
-const express = require('express'); 
+const express = require('express');//This is where everything starts
 const mongoose = require('mongoose'); 
 const bodyParser = require('body-parser'); 
 const nodemailer = require('nodemailer'); 
