@@ -1,6 +1,6 @@
 //Kevin Volkov: This is the main app.js file which start everything: connects to DB, etc ....
 const express = require('express');//This is where everything starts
-const mongoose = require('mongoose'); 
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser'); 
 const nodemailer = require('nodemailer'); 
 const stripe = require('stripe')('your_stripe_secret_key'); 
@@ -19,7 +19,7 @@ mongoose.connect('mongodb://localhost:27017/ecommerceDB')
 
 
 
-// Routes 
+//  Routes 
 const itemsRoute = require('./routes/items'); 
 const orderRoute = require('./routes/order'); 
 app.use('/items', itemsRoute); 
