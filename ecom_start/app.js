@@ -1,6 +1,7 @@
 //Kevin Volkov: This is the main app.js file which start everything: connects to DB, etc ....
-const express = require('express'); 
-const mongoose = require('mongoose'); 
+//backend 
+const express = require('express'); //express is node.js web app infrastructure
+const mongoose = require('mongoose'); //still mongo will be passing to MySQL Soon
 const bodyParser = require('body-parser'); 
 const nodemailer = require('nodemailer'); 
 const stripe = require('stripe')('your_stripe_secret_key'); 
