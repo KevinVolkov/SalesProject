@@ -1,9 +1,8 @@
 //Kevin Volkov: This is the main app.js file which start everything: connects to DB, etc ....
-//this is basically backend 
-const express = require('express'); //kevin: this is node.js app framework
-const mongoose = require('mongoose'); //database: later will use MySQL
-const bodyParser = require('body-parser'); //library to parse body of incoming HTTP requests
-const nodemailer = require('nodemailer'); //email utility, still do not know... continue
+const express = require('express'); 
+const mongoose = require('mongoose'); 
+const bodyParser = require('body-parser'); 
+const nodemailer = require('nodemailer'); 
 const stripe = require('stripe')('your_stripe_secret_key'); 
 const app = express(); 
 app.use(bodyParser.urlencoded({ extended: true })); 
