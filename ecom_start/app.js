@@ -3,7 +3,7 @@
 const express = require('express'); //kevin: this is node.js app framework
 const mongoose = require('mongoose'); //database: later will use MySQL
 const bodyParser = require('body-parser'); //library to parse body of incoming HTTP requests
-const nodemailer = require('nodemailer'); //email utility, still do not know...
+const nodemailer = require('nodemailer'); //email utility, still do not know... continue
 const stripe = require('stripe')('your_stripe_secret_key'); 
 const app = express(); 
 app.use(bodyParser.urlencoded({ extended: true })); 
