@@ -1,53 +1,68 @@
-//Kevin Volkov: and this is orderControler
-//Model–view–presenter (MVP) is a derivation of the model–view–controller (MVC) architectural pattern, 
-//and is used mostly for building user interfaces.
-const Customer = require('../models/Customer'); 
-const nodemailer = require('nodemailer'); 
-const stripe = require('stripe')('your_stripe_secret_key'); 
- 
-exports.createOrder = async (req, res) => { 
-  // Assuming req.body contains customer and order data 
-  const { name, email, address, items, totalAmount, token } = req.body; 
- 
-  // Process payment 
-  try { 
-    const charge = await stripe.charges.create({ 
-      amount: totalAmount * 100, 
-      currency: 'usd', 
-      source: token, 
-      description: `Purchase by ${name}` 
-    }); 
- 
-    // Save customer and order to the database 
-    const customer = new Customer({ name, email, address }); 
-    await customer.save(); 
- 
-    // Send confirmation email 
-    const transporter = nodemailer.createTransport({ 
-      service: 'gmail', 
-      auth: { 
-        user: 'your_email@gmail.com', 
-        pass: 'your_email_password' 
-      } 
-    }); 
- 
-    const mailOptions = { 
-      from: 'your_email@gmail.com', 
-      to: email, 
-      subject: 'Order Confirmation', 
-      text: `Thank you for your purchase! Your order is being processed.` 
-    }; 
- 
-    transporter.sendMail(mailOptions, (error, info) => { 
-      if (error) { 
-        return console.log(error); 
-      } 
-      console.log('Email sent: ' + info.response); 
-    }); 
- 
-    res.redirect('/confirmation.html'); 
-  } catch (err) { 
-    console.error(err); 
-    res.status(500).send('Error processing order'); 
-  } 
+const Customer = require('../models/Customer'); // Adjust path as necessary
+const Item = require('../models/Item'); // Adjust path as necessary
+
+const sendConfirmationEmail = require('../utils/mailer'); // Adjust path as necessary
+
+let cart = [];
+
+exports.addToCart = async (req, res) => {
+    const itemId = req.body.itemId;
+    const item = await Item.findById(itemId);
+
+    if (item) {
+        cart.push(item);
+    }
+
+    res.redirect('/order/cart');
+};
+
+
+exports.viewCart = (req, res) => {
+  res.render('cart', { cart });  // Render the 'cart.ejs' view and pass the cart array to it
+};
+
+
+exports.checkout = async (req, res) => {
+    const { name, email, address, creditCard } = req.body;
+
+    // Ensure cart is initialized as an array
+    const cart = req.session.cart || [];
+
+    try {
+        // Check if the customer is already registered
+        let customer = await Customer.findOne({ email });
+
+        if (!customer) {
+            // Create a new guest customer if they don't exist
+            customer = new Customer({
+                name,
+                email,
+                address,
+                isRegistered: false // Guest checkout
+            });
+        } else {
+            // Update existing customer details
+            customer.name = name;
+            customer.address = address;
+            await customer.save();
+        }
+
+        // Process the order here...
+
+        // Ensure cart is not undefined before calling map
+        if (cart.length > 0) {
+            // If there are items in the cart, you can process them
+            // Example: Extracting item names
+            const itemNames = cart.map(item => item.name); // Adjust according to your cart structure
+            console.log('Items in cart:', itemNames);
+        } else {
+            console.log('Cart is empty');
+        }
+
+        // Render confirmation page with name, address, email, and cart
+        res.render('confirmation', { name, address, email, cart });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error processing order');
+    }
 };
