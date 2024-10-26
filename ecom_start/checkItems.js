@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Item = require('./models/Item');
 
+/*
 // Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/ecommerceDB')
   .then(() => {
@@ -12,3 +13,4 @@ mongoose.connect('mongodb://localhost:27017/ecommerceDB')
     mongoose.connection.close();  // Close the connection after retrieving data
   })
   .catch(err => console.error('Error:', err));
+*/

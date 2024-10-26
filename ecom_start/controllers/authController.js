@@ -8,7 +8,9 @@ exports.register = async (req, res) => {
     try {
 
  // Check if a user with the same email already exists
- let existingCustomer = await Customer.findOne({ email });
+ let existingCustomer = await Customer.findOne({ where: { email } });
+ 
+
  if (existingCustomer) {
      return res.status(400).render('register', { error: 'This Email is already registered.' });
  }

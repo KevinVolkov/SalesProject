@@ -14,9 +14,16 @@ router.post('/register', async (req, res) => {
 
     try {
         // Check if email already exists
-        let customer = await Customer.findOne({ email });
+        //let customer = await Customer.findOne({ email });
+          let customer = await Customer.findOne({ 
+            where: { email } // Proper use of 'where' clause
+        });
+
+
         if (customer) {
-            return res.status(400).send('Customer with this email already exists.');
+            //return res.status(400).send('Customer with this email already exists.');
+            return res.render('register', { errorMessage: 'Customer with this email already exists.' });
+            //res.redirect('/register');
         }
 
         // Hash the password
@@ -52,7 +59,7 @@ router.post('/login', async (req, res, next) => {
 
     try {
         // Find the customer by email
-        const customer = await Customer.findOne({ email });
+        const customer = await Customer.findOne({ where: { email } });//const customer = await Customer.findOne({ email });
 
         if (!customer) {
             return res.status(400).send('No user found with that email.');
@@ -67,18 +74,34 @@ router.post('/login', async (req, res, next) => {
         console.log("Password from DB='"+customer.password+"'");
 
         // Compare password with hash
+        //const isMatch = await(password==customer.password);//bcrypt.compare(password, customer.password);
         const isMatch = await bcrypt.compare(password, customer.password);
+
         console.log(`Password entered='${password}', Password from DB='${customer.password}', isMatch=${isMatch}`);
 
-        if (isMatch) {
+        if (isMatch) 
+        {
             // Authentication successful
-            req.login(customer, (err) => {
+            /*req.login(customer, (err) => {
                 if (err) return next(err);
                 res.redirect('/profile'); // or wherever you want to redirect
-            });
-        } else {
+            });*/
+            // Manually set session or login state
+          req.session.customer = {
+            id: customer.id,
+            name: customer.name,
+            email: customer.email
+         };
+
+          res.redirect('/'); // Redirect to homepage or other page on successful login
+
+        } 
+        else 
+        {
             // Authentication failed
-            res.status(400).send('Incorrect password...');
+            //res.status(400).send('Incorrect password...');
+            return res.render('login', { errorMessage: 'Incorrect password!' });
+       
         }
     } catch (err) {
         console.error(err);
@@ -88,6 +111,18 @@ router.post('/login', async (req, res, next) => {
 
 
 // Logout
-router.get('/logout', customerController.logout);
+//router.get('/logout', customerController.logout);
+// Logout Route
+
+
+router.get('/logout', (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        return res.redirect('/');
+      }
+      res.redirect('/');
+    });
+  });
+  
 
 module.exports = router;

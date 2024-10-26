@@ -7,7 +7,7 @@ let cart = [];
 
 exports.addToCart = async (req, res) => {
     const itemId = req.body.itemId;
-    const item = await Item.findById(itemId);
+    const item = await Item.findByPk(itemId);//    const item = await Item.findById(itemId);
 
     if (item) {
         cart.push(item);
@@ -16,9 +16,19 @@ exports.addToCart = async (req, res) => {
     res.redirect('/order/cart');
 };
 
-
+/*
 exports.viewCart = (req, res) => {
   res.render('cart', { cart });  // Render the 'cart.ejs' view and pass the cart array to it
+};*/
+// View Cart route
+exports.viewCart = (req, res) => {
+    const cart = req.session.cart || []; // retrieve the cart from session, or default to empty array
+
+    if (cart.length === 0) {
+        return res.render('cart', { cart, message: "Your cart is empty." });
+    }
+
+    res.render('cart', { cart, message: null });
 };
 
 
@@ -30,7 +40,8 @@ exports.checkout = async (req, res) => {
 
     try {
         // Check if the customer is already registered
-        let customer = await Customer.findOne({ email });
+        //let customer = await Customer.findOne({ email });
+        let customer = await Customer.findOne({ where: { email } });
 
         if (!customer) {
             // Create a new guest customer if they don't exist
@@ -63,6 +74,6 @@ exports.checkout = async (req, res) => {
         res.render('confirmation', { name, address, email, cart });
     } catch (error) {
         console.error(error);
-        res.status(500).send('Error processing order');
+        res.status(500).send('Error processing order/checkout');
     }
 };

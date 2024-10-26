@@ -1,6 +1,6 @@
 const Customer = require('../models/Customer');
 const bcrypt = require('bcryptjs');
-const passport = require('passport');
+
 
 exports.register = async (req, res) => {
   const { name, email, password } = req.body;
@@ -23,15 +23,6 @@ exports.register = async (req, res) => {
   }
 };
 
-// Login
-/*
-exports.login = (req, res, next) => {
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/customers/login',
-    failureFlash: true,
-  })(req, res, next);
-};*/
 
 
 exports.login = async (req, res) => {
@@ -39,7 +30,7 @@ exports.login = async (req, res) => {
 
   try {
       // Find the customer by email
-      const customer = await Customer.findOne({ email });
+      const customer = await Customer.findOne({  where: { email }  });
       if (!customer) {
           return res.status(400).render('login', { error: 'Email not found. Please register first.' });
       }
@@ -48,7 +39,7 @@ exports.login = async (req, res) => {
       console.log("Password from DB='"+customer.password+"'");
 
       // Compare the entered password with the stored hashed password
-      const isMatch = await bcrypt.compare(password, customer.password);
+      const isMatch = await (password==customer.password);//await bcrypt.compare(password, customer.password);
       if (!isMatch) {
           return res.status(400).render('login', { error: 'Incorrect password!!!' });
       }

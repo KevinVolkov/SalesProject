@@ -16,10 +16,11 @@
             <ul>
                 <% cart.forEach(item => { %>
                     <li>
-                        <strong><%= item.name %></strong> - $<%= item.price %>
+                      <strong><%= item.name %></strong> - <%= item.quantity %> x $<%= item.price %>
                     </li>
                 <% }) %>
             </ul>
+            <p>Total: $<%= cart.reduce((sum, item) => sum + item.price * item.quantity, 0) %></p>
             <form action="/order/checkout" method="GET">
                 <input type="submit" value="Proceed to Checkout">
             </form>

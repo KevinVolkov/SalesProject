@@ -33,5 +33,14 @@
             <input type="submit" value="Register">
         </form>
     </div>
+
+    <% if (typeof errorMessage !== 'undefined') { %>
+        <script>
+          // Display the popup
+          alert("<%= errorMessage %>");
+          // Redirect back to register page after popup
+          window.location.href = '/register';
+        </script>
+      <% } %>
 </body>
 </html>
