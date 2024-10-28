@@ -9,6 +9,20 @@
         <li><strong>Welcome, <%= customer.name %>!</strong></li>
       <% } %>
     </ul>
+
+
+   <!-- Cart Button Section -->
+  <div class="cart-button-container">
+    <a href="/order//cart" class="cart-button">
+      Cart
+      <span class="cart-count">
+        <%= typeof(cartCount) !== 'undefined' ? cartCount : 0 %>
+      </span>
+    </a>
+  </div>
+
+
+
     <div class="logo">
       <h1>ABC Sales</h1>
     </div>

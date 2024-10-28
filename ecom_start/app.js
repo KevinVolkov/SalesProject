@@ -5,6 +5,16 @@ const nodemailer = require('nodemailer');
 const stripe = require('stripe')('your_stripe_secret_key');
 const bcrypt = require('bcryptjs');
 
+//Kevin 10/27/24 start want https
+const fs = require('fs');
+const path = require('path');
+const https = require('https');
+// Load SSL certificates (This one self signed, but replace with the paths to my SSL certificate and key when have)
+const options = {
+  key: fs.readFileSync(path.join(__dirname, 'key.pem')),  // private key
+  cert: fs.readFileSync(path.join(__dirname, 'cert.pem')) // certificate
+};//Kevin 10/27/24 end want https
+
 const sequelize = require('./config/db');  // Ensure this points to the right file
 const createDatabase = require('./config/createDatabase');
 const populateItemsIfEmpty = require('./config/populateItems');
@@ -30,11 +40,17 @@ app.use(flash());
 
 app.use((req, res, next) => {
   res.locals.customer = req.session.customer || null; // `customer` is saved in session on login
+  //Kevin 10/27/24 start
+  const cart = req.session.cart || [];
+  res.locals.cartCount = cart.length;
+  //Kevin 10/27/24 end
   next();
 });
 
 
-const PORT = process.env.PORT || 3001;//3000 already in use, why?
+
+
+//Kevin 10/27/24, I declare below for https //const PORT = process.env.PORT || 3001;//3000 already in use, why?
 
 async function startServer() {
   try {
@@ -104,12 +120,17 @@ sequelize.sync().then(async () => {
 
 
 //end populating tablee if empty *********************
+
 app.get('/', (req, res) => {
+  const cartCount = req.session.cart ? req.session.cart.length : 0;
   res.render('index', {
       title: 'Welcome to ABC Sales',
-      user: req.user // Pass user info if needed
+      user: req.user, // Pass user info if needed
+      cartCount: cartCount,//Kevin fix 10/27/24
   });
 });
+
+
 
 // Other middleware and configurations...
 app.get('/checkout', (req, res) => {
@@ -157,6 +178,16 @@ app.get('/logout', (req, res) => {
 });
 
 
+
+
+/* Kevin Volkov: I now do https 
 app.listen(3000, () => {
   console.log('Server started on port 3000');
+});*/
+const server = https.createServer(options, app);
+// Start the server on port 3000 (or another port)
+//already above const PORT = process.env.PORT || 3000;
+const PORT = 443;//3000;//process.env.PORT;// || 3001;//3000 already in use, why?
+server.listen(PORT, () => {
+    console.log(`Server running securely (https) on port ${PORT}`);
 });

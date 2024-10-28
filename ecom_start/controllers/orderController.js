@@ -70,6 +70,8 @@ exports.checkout = async (req, res) => {
             console.log('Cart is empty');
         }
 
+        req.session.cart = []; // I store the cart in the session, clean the cart? Kevin 10/27/24
+
         // Render confirmation page with name, address, email, and cart
         res.render('confirmation', { name, address, email, cart });
     } catch (error) {

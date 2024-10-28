@@ -49,7 +49,7 @@ router.post('/add-to-cart', async (req, res) => {
 router.get('/cart', orderController.viewCart);
 router.post('/checkout', orderController.checkout);
 
-//evfix start
+//kevin start
 // View Cart
 //router.get('/cart', orderController.viewCart);
 
@@ -58,6 +58,13 @@ router.get('/checkout', (req, res) => {
     res.render('checkout');
 });
 
-//evfix end
+//Kevin end
+//Kevin Volkov 10/27/24 start ****************
+// Clear Cart route in routes/order.js
+router.post('/clear-cart', (req, res) => {
+    req.session.cart = []; // Clear the cart by setting it to an empty array
+    res.redirect('/order/cart'); // Redirect back to the cart page or any other page you prefer
+  });
 
+//Kevin Volkov 10/27/24 end ******************
 module.exports = router;
