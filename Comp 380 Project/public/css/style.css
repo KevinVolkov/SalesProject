@@ -1,0 +1,188 @@
+/** Styles of all .ejs elements */
+
+body { /* Body section that contains the entire content of the page */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  padding-top: 20px; /* Adds padding to avoid content overlap with the fixed header */
+}
+
+/* Hide elements with the 'hidden' class */
+.hidden {
+  display: none;
+}
+
+/* Show elements with the 'show' class */
+.show {
+  display: block;
+}
+
+/* Error messages */
+.error {
+  color: red;
+  font-size: 0.9em;
+}
+
+/* Product section styles */
+.product {
+  border: 3px solid #ddd;
+  margin: 10px;
+  padding: 10px;
+}
+
+#products-list img {
+  width: 100px;
+  height: 100px;
+}
+
+main {
+  padding: 20px;
+  padding-top: 60px; /* Ensures main content starts below the header */
+}
+
+/* Fixed objects */
+
+header { /* Header section that contains the title of the page and the login/register button */
+  background-color: #bc1212;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-size: 8px;
+  left: 0;
+  top: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 1000; /* Ensures it's always on top */
+}
+
+/* Search bar within the header */
+#searchbar {
+  position: absolute; /* Keeps the search bar fixed in the header */
+  top: 5px;
+  left: 10px; /* Position it from the left edge */
+  background-color: rgb(0, 255, 42); /* Optional: background color to distinguish it */
+  padding: 5px;
+  z-index: 1001; /* Ensure it's on top of other content */
+}
+
+/* Login/Register Button */
+#signin-button {
+  position: absolute; /* Make the button a positioning context for the circle which means the circle will be positioned relative to the button */
+  top: 2px; /* Adjust to position */
+  right: 100px; /* Adjust to position */
+  background-color: #007bff; /* Button color */
+  color: white; /* Button text color */
+  border: none; /* Remove border */
+  padding: 10px 20px; /* Add padding */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+#signout-button {
+  position: absolute; /* Make the button a positioning context for the circle which means the circle will be positioned relative to the button */
+  top: 2px; /* Adjust to position */
+  right: 50px; /* Adjust to position */
+  background-color: #007bff; /* Button color */
+  color: white; /* Button text color */
+  border: none; /* Remove border */
+  padding: 10px 20px; /* Add padding */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+#myprofile-button {
+  position: absolute; /* Make the button a positioning context for the circle which means the circle will be positioned relative to the button */
+  top: 2px; /* Adjust to position */
+  right: 150px; /* Adjust to position */
+  background-color: #007bff; /* Button color */
+  color: white; /* Button text color */
+  border: none; /* Remove border */
+  padding: 10px 20px; /* Add padding */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Home button that is a square with an image of a home logo */
+#home-button {
+  background-image: url("/util images/home_icon.png");
+  /* Ensure the image stretches in the button background */
+  background-size: cover;
+  /* Set the width and height of the button */
+  width: 45px;
+  height: 45px;
+  position: absolute; /* Make the button a positioning context for the circle which means the circle will be positioned relative to the button */
+  top: 2px; /* Adjust to position */
+  left: 300px; /* Adjust to position */
+  color: white; /* Button text color */
+  border: none; /* Remove border */
+  padding: 10px 20px; /* Add padding */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+#cart-button {
+  position: absolute; /* Make the button a positioning context for the circle which means the circle will be positioned relative to the button */
+  top: 2px; /* Adjust to position */
+  right: 300px; /* Adjust to position */
+  background-color: #007bff; /* Button color */
+  color: white; /* Button text color */
+  border: none; /* Remove border */
+  padding: 10px 20px; /* Add padding */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+#cart-count { /* Circle that displays the number of items in the cart */
+  position: absolute; /* Position the circle absolutely */
+  top: -5px; /* Adjust to position */
+  right: -10px; /* Adjust to position */
+  background-color: yellow; /* Circle color */
+  color: black; /* Circle text color */
+  border-radius: 50%; /* Make it a circle */
+  width: 20px; /* Circle width */
+  height: 20px; /* Circle height */
+  display: flex; /* Center the number */
+  justify-content: center; /* Center the number horizontally */
+  align-items: center; /* Center the number vertically */
+  font-weight: bold; /* Make the number bold */
+}
+
+/* Extra spacing to ensure elements like main content don't overlap with fixed header */
+main, .content {
+  padding-top: 70px; /* Ensure there's enough space between the fixed header and content */
+}
+
+/* Media queries for mobile screens (adjusting button sizes and positioning for smaller screens) */
+@media (max-width: 600px) {
+  #signin-button,
+  #myprofile-button {
+    padding: 8px 12px; /* Reduce padding for smaller screens */
+    font-size: 0.8em; /* Decrease font size for better fit */
+    right: 0px; /* Align buttons closer to the edge for smaller screens */
+  }
+  #home-button {
+    width: 30px; /* Adjust button size */
+    height: 40px;
+    left: 50px; /* Ensure it's visible on smaller screens */
+    top: 5px; /* Adjust vertical alignment */;
+    
+  }
+
+  #cart-button {
+    padding: 8px 12px;
+    font-size: 0.8em;
+    right: 90px; /* Adjust position for smaller screens */
+
+  }
+
+  #searchbar {
+    width: 90%; /* Ensure the search bar fits the mobile screen width */
+    left: 5%; /* Center it horizontally */
+    top: 10px; /* Adjust the top position */
+  }
+
+  header {
+    font-size: 10px; /* Adjust font size for smaller screens */
+    padding: 5px;
+  }
+}

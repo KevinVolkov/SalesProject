@@ -1,0 +1,17 @@
+root
+bigbutt40
+
+// run MySQL login command
+
+mysql -u root -p
+bigbutt40
+
+//commands to access and display db
+
+USE worstbuy_db;
+
+SELECT * FROM users;
+SELECT * FROM products;
+
+how to run schema: 
+mysql> source schema.sql; (be in the schema's directory)
