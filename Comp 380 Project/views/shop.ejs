@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css">
+  <title>
+    <%= title %>
+  </title>
+</head>
+
+<body>
+
+  <%- include('partials/header') %> <!-- Include the header partial -->
+
+    <main>
+      <!-- Display Error if any -->
+      <% if (error !=null) { %>
+        <p>
+          <%= error %>
+        </p>
+        <% } else { %>
+          <h2>Search Results for: <%= searchTerm %>
+          </h2>
+
+          <ul>
+            <% if (products.length> 0) { %>
+              <% products.forEach(product=> { %>
+                <li>
+                  <div class="product">
+                    <h3>
+                      <%= product.name %>
+                    </h3>
+                    <img src="<%= product.image_path %>" alt="<%= product.name %>" width="100">
+                    <p>Price: $<%= product.price %>
+                    </p>
+                    <p>Description: <%= product.description %>
+                    </p>
+                    <label for="quantity-<%= product.id %>">Set the quantity you want of this item in your cart:</label>
+                    <input type="number" min="1" value="1" class="quantity-input" id="quantity-<%= product.id %>">
+
+                    <button class="add-to-cart" data-name="<%= product.name %>" data-product-id="<%= product.id %>"
+                      data-price="<%= product.price %>" data-image_path="<%= product.image_path %>">
+                      Add to Cart</button>
+
+                    <% if (isAdmin) { %>
+                      <!-- Form for editing the product -->
+                      <form class="edit-product-form" enctype="multipart/form-data">
+                        <label>Current Product ID:</label>
+                        <input type="text" class="current-product-id" value="<%= product.id %>" readonly>
+                        <br>
+                        <label>Update Product ID:</label>
+                        <input type="text" class="updated-product-id" value="<%= product.id %>">
+                        <br>
+                        <label>Edit Product Name:</label>
+                        <input type="text" class="edit-product-name-input" value="<%= product.name %>">
+                        <br>
+                        <label>Edit Product Price:</label>
+                        <input type="text" class="edit-product-price-input" value="<%= product.price %>">
+                        <br>
+                        <label>Edit Product Description:</label>
+                        <input type="text" class="edit-product-description-input" value="<%= product.description %>">
+                        <br>
+                        <label>Upload New Image:</label>
+                        <input type="file" class="edit-product-image-input" name="productImage" accept="image/*">
+                        <br>
+                        <button type="submit" class="update-product-button">Update Product</button>
+                      </form>
+
+                      <!-- Form for deleting the product -->
+                      <form class="delete-product-form" style="margin-top: 10px;">
+                        <h3>Delete This Product</h3>
+                        <button type="submit" class="delete-product-button" value="<%= product.id %>">Delete
+                          Product</button>
+                      </form>
+                      <% } %>
+                  </div>
+                </li>
+                <% }) %>
+                  <% } else { %>
+                    <p>No products found for your search.</p>
+                    <% } %>
+          </ul>
+
+          <!-- Admin: Add New Product Form -->
+          <% if (isAdmin) { %>
+            <h3>Add a New Product</h3>
+            <form class="add-product-form" enctype="multipart/form-data">
+              <label>New Product ID:</label>
+              <input type="text" class="new-product-id-input" name="id">
+              <br>
+              <label>New Product Name:</label>
+              <input type="text" class="new-product-name-input" name="name">
+              <br>
+              <label>New Product Price:</label>
+              <input type="text" class="new-product-price-input" name="price">
+              <br>
+              <label>New Product Description:</label>
+              <input type="text" class="new-product-description-input" name="description">
+              <br>
+              <label>Upload Product Image:</label>
+              <input type="file" class="new-product-image-input" name="productImage" accept="image/*">
+              <br>
+              <button type="submit" class="add-product-button">Add Product</button>
+            </form>
+            <% } %>
+              <% } %>
+    </main>
+
+    <footer>
+      <p>© 2024 Worst Buy</p>
+    </footer>
+</body>
+
+<script src="/javascript/shop.js"></script>
+<script src="/javascript/auth/authtokenverify.js"></script>
+
+
+
+</html>
