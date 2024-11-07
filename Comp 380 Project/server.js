@@ -66,8 +66,10 @@ async function launchSite() {
     httpsServer.listen(PORT, HOST, () => {
       console.log(`
 -----------------------------------------------------------------------------------------------------------------
-Worst Buy HTTPS Server is running at:
+Worst Buy HTTPS Server
+Accepting connections from (listening to): ${HOST}
 -----------------------------------------------------------------------------------------------------------------
+
 Internal (localhost or loopback IP 127.0.0.1):
 ***
   Accessible only on this machine
