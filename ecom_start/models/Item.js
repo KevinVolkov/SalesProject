@@ -9,8 +9,8 @@ const itemSchema = new mongoose.Schema({
 
 module.exports = mongoose.model('Item', itemSchema);
 */
-const { DataTypes } = require('sequelize'); // Import the built-in data types
-const sequelize = require('../config/db'); // Import the db connection
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/db');
 
 const Item = sequelize.define('Item', {
   name: {

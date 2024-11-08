@@ -114,14 +114,12 @@ router.post('/login', async (req, res, next) => {
 //router.get('/logout', customerController.logout);
 // Logout Route
 
-// customers/logout, not /logout
+
 router.get('/logout', (req, res) => {
     req.session.destroy((err) => {
       if (err) {
-        console.log("Could not destroy session (/customers/logout)");
         return res.redirect('/');
       }
-      console.log("Session destroyed successfully (/customers/logout)");
       res.redirect('/');
     });
   });

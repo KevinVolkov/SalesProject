@@ -4,16 +4,16 @@ async function createDatabase() {
   const connection = await mysql.createConnection({
     host: 'localhost',
     user: 'root', //Kevin: dod not change, it is allways 'root'
-    password: 'bigbutt40', // Kevin's comment: Update with your MySQL password 
+    password: 'meta', // Kevin's comment: Update with your MySQL password 
   });
 
-  const dbName = 'ecommerceDB'; // Database name
+  const dbName = 'ecommercedb'; // Database name
 
   // Check if the database exists and create it if it doesn't
   await connection.query(`CREATE DATABASE IF NOT EXISTS ${dbName}`);
   console.log(`Database "${dbName}" checked/created successfully.`);
 
-  await connection.end(); // Close the connection after creating the database
+  await connection.end();
 }
 
-module.exports = createDatabase; //unused
+module.exports = createDatabase;

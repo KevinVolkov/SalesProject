@@ -65,7 +65,13 @@ exports.checkout = async (req, res) => {
             // If there are items in the cart, you can process them
             // Example: Extracting item names
             const itemNames = cart.map(item => item.name); // Adjust according to your cart structure
-            console.log('Items in cart:', itemNames);
+            //console.log('Items in cart:', itemNames);
+
+            //send email here?? //Kevin 10/24/24 10/29/24
+           await sendConfirmationEmail(email,name,address); // Kevin 10/29/24, Mason see this line
+           console.log('Email has been sent:');
+
+
         } else {
             console.log('Cart is empty');
         }
@@ -79,4 +85,3 @@ exports.checkout = async (req, res) => {
         res.status(500).send('Error processing order/checkout');
     }
 };
-

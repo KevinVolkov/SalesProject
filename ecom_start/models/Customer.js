@@ -1,6 +1,6 @@
 //const mongoose = require('mongoose');
 //const bcrypt = require('bcryptjs');
-const { DataTypes } = require('sequelize');  // Import the built-in data types
+const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');  // Import the db connection
 
 
