@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <%- include('partials/header') %>
+  <div class="container">
+    <h1>Login</h1>
+    <form action="/customers/login" method="POST">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required>
+      <input type="submit" value="Login">
+    </form>
+  </div>
+
+  <% if (typeof errorMessage !== 'undefined') { %>
+    <script>
+      // Display the popup
+      alert("<%= errorMessage %>");
+      // Redirect back to register page after popup
+      window.location.href = '/login';
+    </script>
+  <% } %>
+</body>
+</html>

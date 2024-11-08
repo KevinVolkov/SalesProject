@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worstbuy Home</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <%- include('partials/header') %>
+    <header>
+        <h1>Welcome to Worstbuy</h1>
+    </header>
+
+    <div class="container">
+        <div class="search-box">
+            <h2>Find Your Desired Garbage</h2>
+            <form action="/items/search" method="GET">
+                <input type="text" name="q" placeholder="Search for an item...">
+                <input type="submit" value="Search">
+            </form>
+        </div>
+
+        <div class="instructions">
+            <p>Search through our wide variety of trash and place an order!</p>
+            <p>Once you find a product, you will be scammed. </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Worstbuy </p>
+    </footer>
+</body>
+</html>

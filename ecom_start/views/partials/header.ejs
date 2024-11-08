@@ -1,0 +1,30 @@
+<nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <% if(typeof(customer)=="undefined" || !customer) { %>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/register">Register</a></li>
+      <% } else { %>
+        <li><a href="/logout">Logout</a></li>
+        <li><strong>Welcome, <%= customer.name %>!</strong></li>
+      <% } %>
+    </ul>
+
+
+   <!-- Cart Button Section -->
+  <div class="cart-button-container">
+    <a href="/order/cart" class="cart-button">
+      Cart
+      <span class="cart-count">
+        <%= typeof(cartCount) !== 'undefined' ? cartCount : 0 %> 
+      </span>
+    </a>
+  </div>
+
+
+
+    <div class="logo">
+      <h1>Worstbuy</h1>
+    </div>
+  </nav>
+  
