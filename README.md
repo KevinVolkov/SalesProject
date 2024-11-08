@@ -1,4 +1,6 @@
 Kevin's comment:
+11/08/24 I restored my original code, which Mason deleted first time, see Jira. Please join me in working on this branch 
+         It currenly has less functions for now. But it is just for now. The VPS web site will follow soon.
 10/27/24 Working with "https" and <cart> button in the menu with number of items in the cart.
 The same code is currently running on my free VPS (on internet):
 You can reach it 24x7:   
