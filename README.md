@@ -1,9 +1,8 @@
 Kevin's comment:
-11/08/24 I restored my original code, which Mason deleted first time, see Jira. Please join me in working on this branch 
+11/08/24 Guys, I restored my original code, which Mason deleted first time, see Jira. Please join me in working on this branch 
          It currenly has less functions for now. But it is just for now. The VPS web site will follow soon.
 10/27/24 Working with "https" and <cart> button in the menu with number of items in the cart.
-The same code is currently running on my free VPS (on internet):
-You can reach it 24x7:   
+The same code will be running on the free VPS (on internet): You will be able to see it 24x7 (not now)
 
 https://abcsales.duckdns.org
 
@@ -15,8 +14,7 @@ node app.js
 
 It will start secure HTTPS server on the port 443 (whichis default https)
 
-To access locally point your web browser to:
-https://localhost   or http://127.0.0.1
+To access locally point your web browser to: https://localhost   
 
 IMPORTANT: your web browser will warn you that the site is not secure. This is because the certificate does not
 correspond to your local site (as I wrote above it correspond to https://abcsales.duckdns.org ), But
