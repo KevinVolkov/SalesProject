@@ -1,31 +1,32 @@
 Kevin's comment:
-11/09/24 Guys, I restored my original code, which Mason deleted first time, see Jira. Please join me in working on this branch 
-         It currenly has less functions for now. But it is just for now. The VPS web site will follow soon.
-11/09/24 Using .env file in the root directory to keep MySQL root password (I use 'meta'). 
-         See also: ../config/createDatabase.js and ../config/db.js ('meta' replaced with process.env.MYSQL_ROOT_PASS
-         Fixed error when creating/populating the DB first time.
-10/27/24 Working with "https" and <cart> button in the menu with number of items in the cart.
-The same code will be running on the free VPS (on internet): You will be able to see it 24x7 (not now)
+11/09/24 Guys, I restored my original code, which Mason deleted first time, see Jira. Please join me in working on this branch\
+         It currenly has less functions for now. But it is just for now. The VPS web site will follow soon.\
+11/09/24 Using .env file in the root directory to keep MySQL root password (I use 'meta').\ 
+         See also: ../config/createDatabase.js and ../config/db.js ('meta' replaced with process.env.MYSQL_ROOT_PASS\
+         Fixed error when creating/populating the DB first time.\
+10/27/24 Working with "https" and <cart> button in the menu with number of items in the cart.\
+The same code will be running on the free VPS (on internet): You will be able to see it 24x7 (not now)\
 
-https://abcsales.duckdns.org
+https://abcsales.duckdns.org\
 
-To download all the directory structure from GitHUB as one "zip"  file select SalesProject/KevinBranch (top-left),
-find the green rectangle choice-box "Code" (top-right), select "Download Zip"
-To run locally in Windows: from the root directory issue
+
+To download all the directory structure from GitHUB as one "zip"  file select SalesProject/KevinBranch (top-left),\
+find the green rectangle choice-box "Code" (top-right), select "Download Zip"\
+To run locally in Windows: from the root directory issue\
    
-node app.js
+node app.js\
 
-It will start secure HTTPS server on the port 443 (whichis default https)
+It will start secure HTTPS server on the port 443 (whichis default https)\
 
-To access locally point your web browser to: https://localhost   
+To access locally point your web browser to: https://localhost  \
 
-IMPORTANT: your web browser will warn you that the site is not secure. This is because the certificate does not
-correspond to your local site (as I wrote above it correspond to https://abcsales.duckdns.org ), But
-please ignore this warning and continue, browser WILL allow it. And:  it is still encrypted https.
+IMPORTANT: your web browser will warn you that the site is not secure. This is because the certificate does not\
+correspond to your local site (as I wrote above it correspond to https://abcsales.duckdns.org ), But\
+please ignore this warning and continue, browser WILL allow it. And:  it is still encrypted https.\
 
-Also see  howtostartwith_mysql_db.txt file (in the root dir) how to start with MySQL and
+Also see  howtostartwith_mysql_db.txt file (in the root dir) how to start with MySQL and\
 generate "fake" db;
 
-----------------------------------------------------------------------------------------------------
-ABC Sales: Major commit 10/26/24 . Working version with MySQL and Login/Registering customers. Full purchase checkout.
-Still no "admin" functions. 
+----------------------------------------------------------------------------------------------------\
+ABC Sales: Major commit 10/26/24 . Working version with MySQL and Login/Registering customers. Full purchase checkout.\
+Still no "admin" functions.\ 
