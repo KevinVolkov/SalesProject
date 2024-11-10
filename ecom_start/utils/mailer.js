@@ -4,14 +4,14 @@ const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
     service: 'Gmail', // You can use other services like 'Yahoo', 'Outlook', etc.
     auth: {
-        user: 'your-email@gmail.com', // Your email address
-        pass: 'your-email-password'   // Your email password (or app-specific password)
+        user: 'abcsales.everything@gmail.com', // My email address, I specifically created at google'your-email@gmail.com', // Your email address
+        pass: 'qfhbpuxpayrswldg',//'your-email-password'   (or app-specific password)
     }
 });
 
 const sendConfirmationEmail = (to, name, address) => {
     const mailOptions = {
-        from: 'your-email@gmail.com', // Sender address
+        from: 'abcsales.everything@gmail.com',//'abcsales.everything@gmail.com', // Sender address
         to: to,                      // List of recipients
         subject: 'Order Confirmation', // Subject line
         text: `Dear ${name},\n\nThank you for your purchase! Your items will be shipped to: ${address}.\n\nBest regards,\nABC Sales Company`, // Plain text body

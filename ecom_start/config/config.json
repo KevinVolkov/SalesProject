@@ -2,21 +2,21 @@
   "development": {
     "username": "root",
     "password": "meta",
-    "database": "ecommerceDB",
+    "database": "ecommercedb",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": "meta",
-    "database": "ecommerceDB",
+    "database": "ecommercedb",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
     "password": "meta",
-    "database": "ecommerceDB",
+    "database": "ecommercedb",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }

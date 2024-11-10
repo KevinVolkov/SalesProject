@@ -3,7 +3,7 @@ const Item = require('./models/Item');
 
 /*
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/ecommerceDB')
+mongoose.connect('mongodb://localhost:27017/ecommercedb')
   .then(() => {
     console.log('Connected to MongoDB');
     return Item.find();  // Find all items

@@ -68,6 +68,9 @@ exports.checkout = async (req, res) => {
             //console.log('Items in cart:', itemNames);
 
             //send email here?? //Kevin 10/24/24 10/29/24
+
+            //Kevin 11/09/24 I will add later here cart contents, but probably I'll ask Irvin/Joaquin
+            // to add it to make the email more detailed
            await sendConfirmationEmail(email,name,address); // Kevin 10/29/24, Mason see this line
            console.log('Email has been sent:');
 

@@ -5,6 +5,8 @@ const nodemailer = require('nodemailer');
 const stripe = require('stripe')('your_stripe_secret_key');
 const bcrypt = require('bcryptjs');
 
+require('dotenv').config();//to use process.env vars .env is in the root dir
+
 //Kevin 10/27/24 start want https
 const fs = require('fs');
 const path = require('path');
@@ -15,8 +17,11 @@ const options = {
   cert: fs.readFileSync(path.join(__dirname, 'cert.pem')) // certificate
 };//Kevin 10/27/24 end want https
 
-const sequelize = require('./config/db');  // Ensure this points to the right file
+//try to do it after const sequelize = require('./config/db');  // Ensure this points to the right file
 const createDatabase = require('./config/createDatabase');
+const sequelize = require('./config/db');  // Ensure this points to the right file
+
+
 const populateItemsIfEmpty = require('./config/populateItems');
 
 //new start **************************************************************
@@ -65,7 +70,7 @@ async function startServer() {
       console.log(`My Server started on port ${PORT}`);
     });*/
   } catch (error) {
-    console.error('Unable to connect to MySQL:', error);
+    console.error('1 Unable to connect to MySQL:', error);
   }
 }
 
@@ -87,7 +92,7 @@ app.use('/customers', customerRoutes);
 app.set('view engine', 'ejs');
 
 // Connect to MongoDB
-//mongoose.connect('mongodb://localhost:27017/ecommerceDB', { useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose.connect('mongodb://localhost:27017/ecommercedb', { useNewUrlParser: true, useUnifiedTopology: true });
 /*
 mongoose.connect('mongodb://localhost:27017/ecommerceDB')
   .then(() => console.log('Connected to MongoDB'))
@@ -115,7 +120,7 @@ sequelize.sync().then(async () => {
   // Start the server after population is complete
  // app.listen(3000, () => {      console.log('Server started on port 3000');  });
 }).catch(err => {
-  console.error('Unable to connect to MySQL:', err);
+  console.error('2 Unable to connect to MySQL:', err);
 });
 
 
