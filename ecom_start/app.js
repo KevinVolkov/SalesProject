@@ -120,6 +120,9 @@ sequelize.sync().then(async () => {
   // Start the server after population is complete
  // app.listen(3000, () => {      console.log('Server started on port 3000');  });
 }).catch(err => {
+  if(err.message.indexOf("Unknown database")!=-1)
+    console.log("Error!!! No database, 2nd message, but it will be created after the first run. So, do CTRL-C and run 'node app.js' again");
+  else
   console.error('2 Unable to connect to MySQL:', err);
 });
 
