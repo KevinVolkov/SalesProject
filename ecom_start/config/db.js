@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('ecommerceDB', 'root', 'meta', { //kevin's comment change 'meta' to your MySQL password
+const sequelize = new Sequelize('ecommerceDB', 'root', process.env.MYSQL_ROOT_PASS, { //kevin's comment change 'meta' to your MySQL password
   host: 'localhost',
   dialect: 'mysql',
   //logging: console.log,
