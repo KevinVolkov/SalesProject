@@ -70,7 +70,11 @@ async function startServer() {
       console.log(`My Server started on port ${PORT}`);
     });*/
   } catch (error) {
-    console.error('1 Unable to connect to MySQL:', error);
+
+    if(error.code=="ECONNREFUSED") //Kevin 11/12/23 This happened to Irvin, so I just show such message, not error
+      console.log("Error!!! ECONNREFUSED 1, probably MySQL Service is not running on this computer");
+    else //old case
+      console.error('1 Unable to connect to MySQL:', error);
   }
 }
 
@@ -120,10 +124,14 @@ sequelize.sync().then(async () => {
   // Start the server after population is complete
  // app.listen(3000, () => {      console.log('Server started on port 3000');  });
 }).catch(err => {
+
   if(err.message.indexOf("Unknown database")!=-1)
     console.log("Error!!! No database, 2nd message, but it will be created after the first run. So, do CTRL-C and run 'node app.js' again");
   else
-  console.error('2 Unable to connect to MySQL:', err);
+  if(err.toString().indexOf("ConnectionRefusedError")!=-1) //Kevin 11/12/23 This happened to Irvin, so I just show such message, not error
+    console.log("Error!!! ConnectionRefusedError 2, probably MySQL Service is not running on this computer");
+  else //old case
+    console.error('2 Unable to connect to MySQL:', err);
 });
 
 

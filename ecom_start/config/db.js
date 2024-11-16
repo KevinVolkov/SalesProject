@@ -16,10 +16,14 @@ sequelize.authenticate()
   })
   .catch(err => {
 
+
     if(err.message.indexOf("Unknown database")!=-1)
       console.log("Error!!! No database, but it will be created after the first run. So, do CTRL-C");
     else
-     console.error('Unable to connect to MySQL:', err);
+    if(err.toString().indexOf("ConnectionRefusedError")!=-1) //Kevin 11/12/23 This happened to Irvin, so I just show such message, not error
+      console.log("Error!!! ConnectionRefusedError 0, probably MySQL Service is not running on this computer");
+    else //old case
+      console.error('0 Unable to connect to MySQL:', err);
   });
 
 module.exports = sequelize;
