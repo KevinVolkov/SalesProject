@@ -1,5 +1,7 @@
 Kevin's comments:
------------------------------------------------------------------------------------------------------------------
+
+11/16/24 commit: See SAL-42 in Jira Improving diagnostics for the first run errors we saw on Irvin's PC
+
 11/11/24 commit: still fixing first time error when creating DB and populating with dummy(fictive) 100 products
          and some other changes
 ------------------------------------------------------------------------------------------------------------------
