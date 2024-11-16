@@ -27,6 +27,12 @@ const Item = sequelize.define('Item', {
   stock: {
     type: DataTypes.INTEGER,
     allowNull: false
+  },
+
+  itemImage: {
+    type: DataTypes.STRING, //Kevin on 11/16/24: maybe later I want to use BLOB if I want to store binary data.
+                            //this is for now image path or URL
+    allowNull: true         //it may be empty
   }
 });
 

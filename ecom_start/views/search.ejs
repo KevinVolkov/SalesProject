@@ -18,6 +18,13 @@
                 <% items.forEach(item => { %>
                     <li>
                         <strong><%= item.name %></strong> - $<%= item.price %>
+
+                        <% 
+                        if (item.itemImage) 
+                        { %> <img src="/uploads/<%= item.itemImage %>" alt="Image of <%= item.name %>" class="search-item-image"> <% } 
+                        else { %> <p>No image available</p> <% } 
+                        %>
+
                         <form action="/order/add-to-cart" method="POST" style="display:inline;">
                             <input type="hidden" name="itemId" value="<%= item.id %>">
                             <input type="submit" value="Add to Cart">

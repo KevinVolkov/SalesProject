@@ -6,15 +6,37 @@ async function populateItemsIfEmpty() {
     try {
         const itemCount = await Item.count(); // Get the count of items in the table
 
+        const itemImages = [
+            'placeholder1.jpg',
+            'placeholder2.jpg',
+            'placeholder3.jpg',
+            'placeholder4.jpg',
+            'placeholder5.jpg',
+            'placeholder6.jpg',
+            'placeholder7.jpg',
+            'placeholder8.jpg',
+            'placeholder9.jpg',
+            'placeholder10.jpg',
+            // Add more image filenames as placeholders
+          ];
+
+
         if (itemCount === 0) {
             const itemsToInsert = [];
 
-            for (let i = 0; i < 100; i++) { // Insert up to 100 random items
+            for (let i = 0; i < 100; i++) { // Insert up to 100 random items:
+
+                var index=Math.floor(Math.random() * (itemImages.length-1));//Random stock from 0 to 2
+                //console.log(i+" adding image index="+index+" file=["+itemImages[index]+"]");
+
+
                 const newItem = {
                     name: faker.commerce.productName(),
                     description: faker.commerce.productDescription(),
                     price: parseFloat(faker.commerce.price()), // Random price
-                    stock: Math.floor(Math.random() * 100) + 1 // Random stock from 1 to 100
+                    stock: Math.floor(Math.random() * 100) + 1, // Random stock from 1 to 100
+                    itemImage: itemImages[index]// Assign random placeholder images
+
                 };
                 itemsToInsert.push(newItem);
             }

@@ -18,6 +18,17 @@
                 <% cart.forEach(item => { %>
                     <li>
                       <strong><%= item.name %></strong> - <%= item.quantity %> x $<%= item.price %>
+
+
+                      <p>
+                        <% 
+                        if (item.itemImage) 
+                        { %> <img src="/uploads/<%= item.itemImage %>" alt="Image of <%= item.name %>" class="cart-item-image"> <% } 
+                        else { %> <p>No image available</p> <% } 
+                        %>
+                        </p>
+  
+                      
                     </li>
                 <% }) %>
             </ul>
@@ -26,7 +37,23 @@
                 <input type="submit" value="Proceed to Checkout">
             </form>
         <% } %>
-        <a href="/" class="btn">Continue Shopping</a>
+      
+
+
+        <div class="cart-actions">
+          
+              
+
+            <a href="/" class="continue-shopping-button">Continue Shopping</a>
+    
+            
+            <form action="/order/clear-cart" method="POST">
+                <button type="submit" class="clear-cart-button">Clear Cart</button>
+              </form>
+            </div>
+    
+           
+
     </div>
 </body>
 </html>

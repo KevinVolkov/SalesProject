@@ -1,4 +1,5 @@
 Kevin's comments:
+11/16/24 commit See SAL-43 in Jira:added Pictures (Images) to every item: needs to be verified, see my email how to verify.
 
 11/16/24 commit: See SAL-42 in Jira Improving diagnostics for the first run errors we saw on Irvin's PC
 

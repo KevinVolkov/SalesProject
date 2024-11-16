@@ -31,6 +31,7 @@ router.post('/add-to-cart', async (req, res) => {
             itemId: item.id,
             name: item.name,
             price: item.price,
+            itemImage: item.itemImage, //Kevin's comment: show itemImage in cart! //11/16/24
             quantity: quantity
         };
 

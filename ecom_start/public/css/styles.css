@@ -160,4 +160,16 @@ nav {
     right: -10px;
   }
 
+  .search-item-image {
+    width: 75px;
+    float: right;
+    margin-left: 15px;
+  }
+
+  .cart-item-image {
+    width: 50px;
+    height:50px;
+    
+  }
+
 
