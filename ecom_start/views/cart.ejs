@@ -1,59 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Shopping Cart</title>
-    <link rel="stylesheet" href="/css/styles.css">
-</head>
-<body>
-    <%- include('partials/header') %>
-    <div class="container">
-        <h1>Your Shopping Cart</h1>
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<title>Your Shopping Cart</title>
+		<link
+			rel="stylesheet"
+			href="/css/styles.css" />
+	</head>
+	<body>
+		<%- include('partials/header') %>
+		<div class="container">
+			<h1>Your Shopping Cart</h1>
 
-        <% if (cart.length === 0) { %>
-            <p>Your cart is empty.</p>
-        <% } else { %>
-            <ul>
-                <% cart.forEach(item => { %>
-                    <li>
-                      <strong><%= item.name %></strong> - <%= item.quantity %> x $<%= item.price %>
+			<% if (cart.length === 0) { %>
+			<p>Your cart is empty.</p>
+			<% } else { %>
+			<ul class="cart-items-list">
+				<% cart.forEach(item => { %>
+				<li class="cart-item">
+					<strong><%= item.name %></strong> - <%= item.quantity %> x $<%=
+					item.price %>
 
-
-                      <p>
-                        <% 
-                        if (item.itemImage) 
-                        { %> <img src="/uploads/<%= item.itemImage %>" alt="Image of <%= item.name %>" class="cart-item-image"> <% } 
-                        else { %> <p>No image available</p> <% } 
-                        %>
-                        </p>
-  
-                      
-                    </li>
-                <% }) %>
-            </ul>
-            <p>Total: $<%= cart.reduce((sum, item) => sum + item.price * item.quantity, 0) %></p>
-            <form action="/order/checkout" method="GET">
-                <input type="submit" value="Proceed to Checkout">
-            </form>
-        <% } %>
-      
+                   
+                   
+					<% 
+					if (item.itemImage) 
+					{ %> <img src="/uploads/<%= item.itemImage %>" alt="Image of <%= item.name %>" class="cart-item-image"> <% } 
+					else { %> <p>No image available</p> <% } 
+					%>
 
 
-        <div class="cart-actions">
-          
-              
 
-            <a href="/" class="continue-shopping-button">Continue Shopping</a>
-    
-            
-            <form action="/order/clear-cart" method="POST">
-                <button type="submit" class="clear-cart-button">Clear Cart</button>
-              </form>
-            </div>
-    
-           
 
-    </div>
-</body>
+
+				</li>
+				<% }) %>
+			</ul>
+			<p>
+				Total: $<%= cart.reduce((sum, item) => sum + item.price * item.quantity,
+				0) %>
+			</p>
+			<form
+				action="/order/checkout"
+				method="GET">
+				<input
+					type="submit"
+					value="Proceed to Checkout" />
+			</form>
+			<% } %>
+			<a
+				href="/"
+				class="btn"
+				>Continue Shopping</a
+			>
+		</div>
+	</body>
 </html>

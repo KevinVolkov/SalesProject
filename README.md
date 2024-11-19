@@ -1,4 +1,7 @@
-Kevin's comments:
+Kevin's comments/history:
+------------------------------------------------------------------------------------------------------------------
+11/19/24 commit Integrated Irvins front end changes! see Irvin's Jira SAL-35 Sal-37 through Sal-41
+------------------------------------------------------------------------------------------------------------------
 11/16/24 commit See SAL-43 in Jira:added Pictures (Images) to every item: needs to be verified, see my email how to verify.
 
 11/16/24 commit: See SAL-42 in Jira Improving diagnostics for the first run errors we saw on Irvin's PC
