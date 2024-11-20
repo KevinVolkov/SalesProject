@@ -56,6 +56,21 @@
 				class="btn"
 				>Continue Shopping</a
 			>
+
+
+           
+			<% if (cart.length != 0) { 
+				%>	
+						<form action="/order/clear-cart" method="POST"  style="margin: 0; padding: 0;"   >
+							<button type="submit" class="btn">Clear Cart</button>
+						</form>	
+				<% } 
+			%>					
+	
+					
+
+
+
 		</div>
 	</body>
 </html>
