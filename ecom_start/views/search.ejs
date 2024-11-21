@@ -1,38 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Search Results</title>
-    <link rel="stylesheet" href="/css/styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
     <%- include('partials/header') %>
     <div class="container">
-        <h1>Search Results</h1>
+      <h1>Search Results</h1>
 
-        <% if (items.length === 0) { %>
-            <p>No items found for your search.</p>
-        <% } else { %>
-            <ul class="results-list">
-                <% items.forEach(item => { %>
-                    <li>
-                        <strong><%= item.name %></strong> - $<%= item.price %>
+      <% if (items.length === 0) { %>
+      <p>No items found for your search.</p>
+      <% } else { %>
+      <ul class="results-list">
+        <% items.forEach(item => { %>
+        <li class="result-item">
+          <strong><%= item.name %></strong> - $<%= item.price %> <% if
+          (item.itemImage) { %>
+          <img
+            src="/uploads/<%= item.itemImage %>"
+            alt="Image of <%= item.name %>"
+            class="search-item-image"
+          />
+          <% } else { %>
+          <p>No image available</p>
+          <% } %>
 
-                        <% 
-                        if (item.itemImage) 
-                        { %> <img src="/uploads/<%= item.itemImage %>" alt="Image of <%= item.name %>" class="search-item-image"> <% } 
-                        else { %> <p>No image available</p> <% } 
-                        %>
-
-                        <form action="/order/add-to-cart" method="POST" style="display:inline;">
-                            <input type="hidden" name="itemId" value="<%= item.id %>">
-                            <input type="submit" value="Add to Cart">
-                        </form>
-                    </li>
-                <% }) %>
-            </ul>
-        <% } %>
+          <form
+            action="/order/add-to-cart"
+            method="POST"
+            style="display: inline"
+          >
+            <input type="hidden" name="itemId" value="<%= item.id %>" />
+            <input type="submit" value="Add to Cart" />
+          </form>
+        </li>
+        <% }) %>
+      </ul>
+      <% } %>
     </div>
-</body>
+  </body>
 </html>

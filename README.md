@@ -1,4 +1,9 @@
 Kevin's comments/history:
+
+-----------------------------------------------------------------------------------------------------------------
+11/20/24 8:12pm Integrated latest Irvin's fixes Restored "Clear Cart" button in /views/cart.ejs again.
+-----------------------------------------------------------------------------------------------------------------
+
 11/19/24 7:43pm Restored "Clear Cart" button in /views/cart.ejs which was somehow loast after Irvin's changes
 
 11/19/24 commit Integrated Irvins front end changes! see Irvin's Jira SAL-35 Sal-37 through Sal-41
@@ -9,6 +14,7 @@ Kevin's comments/history:
 
 11/11/24 commit: still fixing first time error when creating DB and populating with dummy(fictive) 100 products
          and some other changes
+		 
 ------------------------------------------------------------------------------------------------------------------
 11/09/24 Guys, I restored my original code, which Mason deleted first time, see Jira. Please join me in working on 
          this branch. It currenly has less functions for now. But it is just for now. The VPS web site will follow soon.

@@ -1,35 +1,34 @@
 <!-- navigation section -->
 <nav class="navbar">
-	<!-- Logo Section/Home Button -->
-	<div class="logo">
-		<a href="/">
-			<h1>ABC Sales</h1>
-		</a>
-	</div>
-	<!--end-->
+  <!-- Logo Section/Home Button -->
+  <div class="logo">
+    <a href="/">
+      <h1>ABC Sales</h1>
+    </a>
+  </div>
+  <!--end-->
 
-	<!-- Navigation Links -->
-	<div class="nav-right">
-		<ul class="nav-links">
-			<% if(typeof(customer)=="undefined" || !customer) { %>
-			<li><a href="/login">Login</a></li>
-			<li><a href="/register">Register</a></li>
-			<% } else { %>
-			<li><a href="/logout">Logout</a></li>
-			<li><strong>Welcome, <%= customer.name %>!</strong></li>
-			<% } %>
-		</ul>
+  <!-- Navigation Links -->
+  <div class="nav-right">
+    <ul class="nav-links">
+      <% if(typeof(customer)=="undefined" || !customer) { %>
+      <li><a href="/register">Register</a></li>
+      <li><a href="/login">Login</a></li>
 
-		<!-- Cart Button Section -->
-		<div class="cart-button-container">
-			<a
-				href="/order//cart"
-				class="cart-button">
-				Cart
-				<span class="cart-count">
-					<%= typeof(cartCount) !== 'undefined' ? cartCount : 0 %>
-				</span>
-			</a>
-		</div>
-	</div>
+      <% } else { %>
+      <li class="Wel-msg"><strong>Welcome, <%= customer.name %>!</strong></li>
+      <li><a href="/logout">Logout</a></li>
+      <% } %>
+    </ul>
+
+    <!-- Cart Button Section -->
+    <div class="cart-button-container">
+      <a href="/order//cart" class="cart-button">
+        Cart
+        <span class="cart-count">
+          <%= typeof(cartCount) !== 'undefined' ? cartCount : 0 %>
+        </span>
+      </a>
+    </div>
+  </div>
 </nav>
