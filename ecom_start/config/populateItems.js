@@ -1,6 +1,27 @@
-const { faker } = require('@faker-js/faker'); // For random data generation
-const Item = require('../models/Item');//this is correct path notice '..'
+/*
+Module name: orderController.js
+Date of the code (latest update): 11/21/24
+-----------------------------------------------------------------------------------------------
+Programmer: Kevin Volkov /student, CSUN COMP 380, Group #6/
+-----------------------------------------------------------------------------------------------
+Description: populates 'items' table if it is empty (first-time run), uses 'faker' package to 
+             generate random data. Uses randomly image files from the public/uploads directory
+            
+*/
 
+const { faker } = require('@faker-js/faker'); // package for random data generation
+const Item = require('../models/Item');//this is correct path notice '..', was a bug here. 
+                                       //get Item schema/structure as a type/class
+
+/* 
+ @function: populateItemsIfEmpty 
+ @purpose:  populates 'items' table if it is empty (first-time run)
+ @called_from: app.js
+ @input: none
+ @output: populates 'items' table if it is empty (first-time run)
+ @algorithm: uses 'faker' package to generate random data. Uses randomly image files from the 
+             public/uploads directory
+*/
 // Function to populate items if the table is empty
 async function populateItemsIfEmpty() {
     try {

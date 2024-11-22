@@ -1,8 +1,12 @@
 Kevin's comments/history:
 
 -----------------------------------------------------------------------------------------------------------------
-11/20/24 8:12pm Integrated latest Irvin's fixes Restored "Clear Cart" button in /views/cart.ejs again.
+
+11/21/24 11:28pm Integrated latest Joaquin's changes for the detailed confirmation email.
+
 -----------------------------------------------------------------------------------------------------------------
+
+11/20/24 8:12pm Integrated latest Irvin's fixes Restored "Clear Cart" button in /views/cart.ejs again.
 
 11/19/24 7:43pm Restored "Clear Cart" button in /views/cart.ejs which was somehow loast after Irvin's changes
 

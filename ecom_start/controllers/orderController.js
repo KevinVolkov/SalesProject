@@ -1,26 +1,29 @@
-const Customer = require('../models/Customer'); // Adjust path as necessary
-const Item = require('../models/Item'); // Adjust path as necessary
-
-const sendConfirmationEmail = require('../utils/mailer'); // Adjust path as necessary
-
-let cart = [];
-
-exports.addToCart = async (req, res) => {
-    const itemId = req.body.itemId;
-    const item = await Item.findByPk(itemId);//    const item = await Item.findById(itemId);
-
-    if (item) {
-        cart.push(item);
-    }
-
-    res.redirect('/order/cart');
-};
-
 /*
-exports.viewCart = (req, res) => {
-  res.render('cart', { cart });  // Render the 'cart.ejs' view and pass the cart array to it
-};*/
-// View Cart route
+Module name: orderController.js
+Date of the code (latest update): 11/21/24
+-----------------------------------------------------------------------------------------------
+Programmers: Kevin Volkov, Joaquin Banting /students, CSUN COMP 380, Group #6/
+-----------------------------------------------------------------------------------------------
+Description: MIddle-Tier module. Handles checkout, saving orders, and interacting with the cart
+             and orders for the customer. Calls sendConfirmationEmail function to send confirmation 
+             email to the customer.
+*/
+
+const Customer = require('../models/Customer'); // get Customer schema/structure as a type/class
+const Item = require('../models/Item'); //get Item schema/structure as a type/class
+
+const sendConfirmationEmail = require('../utils/mailer'); // get sendConfirmationEmail
+
+let cart = [];//cart is empty array initialy (global)
+
+/* 
+ @function: viewCart 
+ @purpose:  provides View Cart algorithm in web interface to render cart contents
+ @called_from: /routes/order.js
+ @input: req,res (web request and response structures)
+ @output: calls to render cart (effectievely calling /views/cart.ejs passing cart structure as a parameter
+ @algorithm: clear from the code and comments below
+*/
 exports.viewCart = (req, res) => {
     const cart = req.session.cart || []; // retrieve the cart from session, or default to empty array
 
@@ -32,6 +35,16 @@ exports.viewCart = (req, res) => {
 };
 
 
+/* 
+ @function: checkout 
+ @purpose:  provides checkout algorithm in web interface to render checkout view
+ @called_from: /routes/order.js
+ @input: req,res (web request and response structures)
+ @output: calls to render cart (effectievely calling /views/confirmation.ejs passing name, address, email, cart 
+          as parameters. Finally calls sendConfirmationEmail to send the confirmation email
+ @algorithm: clear from the code and comments below
+*/
+
 exports.checkout = async (req, res) => {
     const { name, email, address, creditCard } = req.body;
 
@@ -40,7 +53,7 @@ exports.checkout = async (req, res) => {
 
     try {
         // Check if the customer is already registered
-        //let customer = await Customer.findOne({ email });
+        //let customer = await Customer.findOne({ email });//Kevin's comment: it did not work this way
         let customer = await Customer.findOne({ where: { email } });
 
         if (!customer) {
@@ -69,9 +82,15 @@ exports.checkout = async (req, res) => {
 
             //send email here?? //Kevin 10/24/24 10/29/24
 
-            //Kevin 11/09/24 I will add later here cart contents, but probably I'll ask Irvin/Joaquin
-            // to add it to make the email more detailed
-           await sendConfirmationEmail(email,name,address); // Kevin 10/29/24, Mason see this line
+            //Kevin 11/09/24: I will add later here cart contents, but probably I'll ask Irvin/Joaquin
+            // to add it to make the email more detailed. Kevin 11/21/24 : done by Joaquin
+
+            // Calculate the total price 11/14/24
+            const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            // Extract the last 4 digits of the credit card 11/14/24
+            const last4Digits = creditCard.slice(-4); 
+            await sendConfirmationEmail(email,name,address,cart,total,last4Digits); // Kevin 10/29/24,  see this line
+           //await sendConfirmationEmail(email,name,address); // Kevin 10/29/24, see this line
            console.log('Email has been sent:');
 
 
@@ -85,6 +104,6 @@ exports.checkout = async (req, res) => {
         res.render('confirmation', { name, address, email, cart });
     } catch (error) {
         console.error(error);
-        res.status(500).send('Error processing order/checkout');
+        res.status(500).send('Error processing order/checkout');//Kevin: ugly, but hopefully will never happen
     }
 };

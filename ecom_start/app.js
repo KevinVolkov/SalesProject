@@ -1,16 +1,43 @@
+/**
+ * Module name: app.js
+ *  Date of the code (latest update): 11/21/24
+ *  -----------------------------------------------------------------------------------------------
+ *  Programmers: Kevin Volkov, Irvin Moreno, Joaquin Banting /students, CSUN COMP 380, Group #6/
+ * ------------------------------------------------------------------------------------------------
+ *  Description:  Main application entry point for our app. 
+ * - Sets up and configures the Express server.
+ * - Connects to the MySQL DB and ensures it is initialized (and populated after the first start).
+ * - Configures middleware to handle requests, parsing data, sessions (cookies!!!)  authentication.
+ * - Defines the routes structure to handle user actions (Kevin: later we will add actions!)
+ * - Errors handling (could be better, but now time for now)
+ * - Starts the https server on TCP Port 443, and listens for incoming requests.
+ * This is the the backbone of the whole application, handling interactions between 
+ * controllers, views, models, and utilities.
+ *
+ * Usage:
+ * Run this file using Node.js to start the application:
+ *   'node app.js'
+ * what helped a lot:
+ * https://buttercms.com/blog/nodejs-ecommerce-how-to-build-a-shopping-app-with-buttercms/ and 
+ * https://dev.to/jamesoyanna/developing-a-fullstack-e-commerce-application-with-typescript-4ni6
+ * however our code is complitely original written line by line
+ */
+
+// import the required external libraries (node.js packages)
 const express = require('express');
 //const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const nodemailer = require('nodemailer');
-const stripe = require('stripe')('your_stripe_secret_key');
-const bcrypt = require('bcryptjs');
+const bodyParser = require('body-parser');//web request response body parser
+const nodemailer = require('nodemailer');//utility to send emails
+const stripe = require('stripe')('your_stripe_secret_key');//stripe API for server-side 
+const bcrypt = require('bcryptjs');//to one-way encoding passwords
 
-require('dotenv').config();//to use process.env vars .env is in the root dir
+require('dotenv').config();//to use process.env vars .env is in the root dir. we only keep there MySQL root package
 
 //Kevin 10/27/24 start want https
-const fs = require('fs');
-const path = require('path');
-const https = require('https');
+const fs = require('fs');//object to use local file system functions
+const path = require('path');//object to use 'path'' functions
+const https = require('https');//will use this object to start https server with the help of "https" package
+
 // Load SSL certificates (This one self signed, but replace with the paths to my SSL certificate and key when have)
 const options = {
   key: fs.readFileSync(path.join(__dirname, 'key.pem')),  // private key
@@ -18,27 +45,27 @@ const options = {
 };//Kevin 10/27/24 end want https
 
 //try to do it after const sequelize = require('./config/db');  // Ensure this points to the right file
-const createDatabase = require('./config/createDatabase');
+const createDatabase = require('./config/createDatabase');//create DB if does not exist
 const sequelize = require('./config/db');  // Ensure this points to the right file
 
 
-const populateItemsIfEmpty = require('./config/populateItems');
+const populateItemsIfEmpty = require('./config/populateItems');//populate items table with fake items (if not populated)
 
 //new start **************************************************************
 
-const Customer = require('./models/Customer');
-const session = require('express-session');
+const Customer = require('./models/Customer');// get Customer schema/structure as a type/class
+const session = require('express-session');// get session structure as a type/class
 const flash = require('connect-flash');
 
-const customerRoutes = require('./routes/customers');
+const customerRoutes = require('./routes/customers');//route to customers
 
 const app = express();
-
+//This is what used for cookies, kept in browser
 app.use(session({
-  secret: 'yourSecretKey',
+  secret: 'KevinMyVerySecretKey',//cookie key in browser!
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false } // set to true in production when using HTTPS
+  cookie: { secure: false } //Kevin's comment: I will set it to true in production on my AWS VPS (if succeed)
 }));
 
 app.use(flash());
@@ -53,7 +80,14 @@ app.use((req, res, next) => {
 });
 
 
-
+/* 
+ @function: startServer() , the name is misnomer , but did not change it , for understanding the historu
+ @purpose:  provides checkout algorithm in web interface to render checkout view
+ @called_from: app.js initialisation
+ @input: none
+ @output: none, but creates DB if does not exist (it used to start http/https server in the past, that is why such a name)
+ @algorithm: clear from the code and comments below. Process first-time run errors to give better diagnstics.
+*/
 
 //Kevin 10/27/24, I declare below for https //const PORT = process.env.PORT || 3001;//3000 already in use, why?
 
@@ -64,7 +98,7 @@ async function startServer() {
 
     // Sync the Sequelize models with the database, No, it adds email_2, email_3
     //await sequelize.sync({ alter: true }); // `alter: true` ensures tables are updated
-/* dod not do this, I do this before
+/* do not do this, I do this before
     // Start the Express server
     app.listen(PORT, () => {
       console.log(`My Server started on port ${PORT}`);
@@ -80,22 +114,17 @@ async function startServer() {
 
 startServer();
 
-
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-
-
+//Route to 'customerRoutes'
 app.use('/customers', customerRoutes);
-
-
 
 
 // Set the view engine to ejs
 app.set('view engine', 'ejs');
 
-// Connect to MongoDB
+// Connect to MongoDB, Kevin: but I do not use MongoDB any longer...keeping the comment for history
 //mongoose.connect('mongodb://localhost:27017/ecommercedb', { useNewUrlParser: true, useUnifiedTopology: true });
 /*
 mongoose.connect('mongodb://localhost:27017/ecommerceDB')
@@ -135,7 +164,15 @@ sequelize.sync().then(async () => {
 });
 
 
-//end populating tablee if empty *********************
+//end populating table if empty *********************
+/* 
+ @function: app.get, setting routing to  rendering the main page /views/index.ejs
+ @purpose:  setting routing to  rendering the page /views/index.ejs
+ @called_from: app.js initialisation
+ @input: req,res (web request and response structures)
+ @output: rendering main page
+ @algorithm: clear from the code and comments below. 
+*/
 
 app.get('/', (req, res) => {
   const cartCount = req.session.cart ? req.session.cart.length : 0;
@@ -147,7 +184,14 @@ app.get('/', (req, res) => {
 });
 
 
-
+/* 
+ @function: app.get setting routing to  rendering /views/checkout.ejs
+ @purpose:  routing to  rendering /views/checkout.ejs
+ @called_from: app.js initialization
+ @input: req,res (web request and response structures)
+ @output: rendering checkout page
+ @algorithm: clear from the code and comments below. 
+*/
 // Other middleware and configurations...
 app.get('/checkout', (req, res) => {
   if (!req.session.customer) {
@@ -161,6 +205,14 @@ app.get('/checkout', (req, res) => {
 });
 
 // Include routes for login, register, and logout
+/* 
+ @function: app.get setting routing to  /views/login.ejs
+ @purpose:  provides setting routing to  /views/login.ejs
+ @called_from: app.js initialization
+ @input: req,res (web request and response structures)
+ @output: rendering login page
+ @algorithm: clear from the code and comments below. 
+*/
 app.get('/login', (req, res) => {
  // res.render('login');
  res.render('login', {
@@ -169,6 +221,16 @@ app.get('/login', (req, res) => {
 });
 });
 
+
+/* 
+ @function: app.get setting routing to  /views/register.ejs
+ @purpose:  provides setting routing to  /views/register.ejs
+ @called_from: app.js initialization
+ @input: req,res (web request and response structures)
+ @output: rendering 'register' page view
+ @algorithm: clear from the code and comments below. 
+*/
+
 app.get('/register', (req, res) => {
    res.render('register', {
    title: 'Please Register with ABC Sales',
@@ -176,14 +238,16 @@ app.get('/register', (req, res) => {
  });
  });
 
-/*
-app.get('/logout', (req, res) => {
-  req.logout();  // Use this if Passport.js is being used
-  res.render('logout',{
-    user: req.user // Pass user info if needed
-  });
-});
+ /* 
+ @function: app.get setting routing to  logout path
+ @purpose:  provides setting routing to  logout path 
+ @called_from: app.js initialization
+ @input: req,res (web request and response structures)
+ @output: originally wanted rendering 'logout page view', but it is not seen at all because the algorithm
+          immedeately redirects it to the main page
+ @algorithm: simply destroy the session and redirect to the main page
 */
+
 app.get('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
@@ -196,11 +260,11 @@ app.get('/logout', (req, res) => {
 
 
 
-/* Kevin Volkov: I now do https 
+/* Kevin Volkov's comment: I now do https , but started from http, keep for history
 app.listen(3000, () => {
   console.log('Server started on port 3000');
 });*/
-const server = https.createServer(options, app);
+const server = https.createServer(options, app);//finally create and run the https server.
 // Start the server on port 3000 (or another port)
 //already above const PORT = process.env.PORT || 3000;
 const PORT = 443;//3000;//process.env.PORT;// || 3001;//3000 already in use, why?

@@ -1,6 +1,15 @@
-const { Sequelize } = require('sequelize');
+/*
+Module name: db.js
+Date of the code (latest update): 11/21/24
+-----------------------------------------------------------------------------------------------
+Programmer: Kevin Volkov /student, CSUN COMP 380, Group #6/
+-----------------------------------------------------------------------------------------------
+Description: connects to MySQL database and authenticates. Uses 'sequelize' package to connect
+*/
 
-const sequelize = new Sequelize('ecommercedb', 'root', process.env.MYSQL_ROOT_PASS, { //kevin's comment change 'meta' to your MySQL password
+const { Sequelize } = require('sequelize');//get/import 'sequelize' type/clas/library, to use its functions
+//create Sequelize object below
+const sequelize = new Sequelize('ecommercedb', 'root', process.env.MYSQL_ROOT_PASS, { //kevin's comment: this is from .env file
   host: 'localhost',
   dialect: 'mysql',
   //logging: console.log,
@@ -9,7 +18,16 @@ const sequelize = new Sequelize('ecommercedb', 'root', process.env.MYSQL_ROOT_PA
 
 });
 
-//******************************************************************************* */
+//******************************************************************************* 
+/*
+ @function: authenticate() 
+ @purpose: authenticates the sequelize objects connection to MYSQL DB
+ @called_from: app.js
+ @input: none (connection params are taken from the object structure)
+ @output: none: connects to DB
+ @algorithm: connects to DB via Sequelize
+*/
+
 sequelize.authenticate()
   .then(() => {
     console.log('Connected to MySQL via Sequelize');

@@ -1,3 +1,12 @@
+/*    Module name: public/css/styles.css
+ *    Date of the code (latest update): 11/21/24
+ *    -----------------------------------------------------------------------------------------------
+ *    Programmer: Irvin Moreno /student, CSUN COMP 380, Group #6/
+ *    ------------------------------------------------------------------------------------------------
+ *    Description: CSS file which is used in all front-end views to make the web GUI look consistent
+ */
+
+
 /* General styles for body */
 body {
 	font-family: Arial, sans-serif;

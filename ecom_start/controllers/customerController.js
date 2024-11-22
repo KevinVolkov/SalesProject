@@ -1,12 +1,30 @@
-const Customer = require('../models/Customer');
-const bcrypt = require('bcryptjs');
+/*
+Module name: customerController.js
+Date of the code (latest update): 11/21/24
+-----------------------------------------------------------------------------------------------
+Programmer: Kevin Volkov /student, CSUN COMP 380, Group #6/
+-----------------------------------------------------------------------------------------------
+Description: Middle-Tier module. Handles authentication-related actions like login, registration, and logout.
+*/
 
 
+const Customer = require('../models/Customer');// get Customer schema/structure as a type/class
+const bcrypt = require('bcryptjs');;// get bcryptjs object for one-way encryption functions
+
+/* 
+ @function: register 
+ @purpose:  provides register algorithm in web interface to register new Customer
+ @called_from: /routes/customer.js
+ @input: req,res (web request and response structures)
+ @output: calls to render Login View (effectievely calling /views/login.ejs) if succesfull or Register View
+          (/views/register.ejs) if registration fails.
+ @algirithm: saves new registred customer in the database, see also comments below
+*/
 exports.register = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
-      const hashedPassword = await bcrypt.hash(password, 10);
+      const hashedPassword = await bcrypt.hash(password, 10);//one-way hashing
 
       const newCustomer = new Customer({
           name,
@@ -14,17 +32,25 @@ exports.register = async (req, res) => {
           password: hashedPassword
       });
 
-      await newCustomer.save();
+      await newCustomer.save();//saves the new registred customer in the database
       req.flash('success_msg', 'You are now registered and can log in');
       res.redirect('/login');
   } catch (err) {
-      console.error(err);
-      res.redirect('/register');
+      console.error(err);//show him the error this simple way
+      res.redirect('/register');//no luck, do it again, the Register View is registered
   }
 };
 
 
-
+/* 
+ @function: login 
+ @purpose:  provides login algorithm in web interface to login a Customer
+ @called_from: /routes/customer.js
+ @input: req,res (web request and response structures)
+ @output: calls to render the main page , if login is OK.
+ @algirithm: takes a password from the web request body , hashes it and checks with the one in DB. 
+             Redirects to the main view (/vews/index.ejs). See also comments below
+ */
 exports.login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -53,7 +79,15 @@ exports.login = async (req, res) => {
   }
 };
 
-// Logout
+/* 
+ @function: logout 
+ @purpose:  provides logout algorithm in web interface to logout a Customer
+ @called_from: /routes/customer.js
+ @input: req,res (web request and response structures)
+ @output: calls to render the main page , after invouking req.logout() function (part of session)
+ @algirithm: takes a password from the web request body , hashes it and checks with the one in DB. 
+             Redirects to the main view (/vews/index.ejs). See also comments below
+ */
 exports.logout = (req, res) => {
   req.logout();
   res.redirect('/');
