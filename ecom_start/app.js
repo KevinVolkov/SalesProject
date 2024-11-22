@@ -17,14 +17,18 @@
  * Usage:
  * Run this file using Node.js to start the application:
  *   'node app.js'
+ * 
  * what helped a lot:
  * https://buttercms.com/blog/nodejs-ecommerce-how-to-build-a-shopping-app-with-buttercms/ and 
  * https://dev.to/jamesoyanna/developing-a-fullstack-e-commerce-application-with-typescript-4ni6
+ * https://medium.com/geekculture/how-i-built-an-e-commerce-api-with-nodejs-express-and-mongodb-7b42b5253ffb
+ * https://taglineinfotechus.medium.com/mastering-node-js-a-step-by-step-guide-to-building-a-powerful-ecommerce-app-d6cc7df69c12
+ * https://www.prioxis.com/blog/nodejs-ecommerce-app
  * however our code is complitely original written line by line
  */
 
 // import the required external libraries (node.js packages)
-const express = require('express');
+const express = require('express');//this is "express" framework app
 //const mongoose = require('mongoose');
 const bodyParser = require('body-parser');//web request response body parser
 const nodemailer = require('nodemailer');//utility to send emails
@@ -81,7 +85,7 @@ app.use((req, res, next) => {
 
 
 /* 
- @function: startServer() , the name is misnomer , but did not change it , for understanding the historu
+ @function: startServer() , the name is misnomer , but we did not change it , for understanding the history
  @purpose:  provides checkout algorithm in web interface to render checkout view
  @called_from: app.js initialisation
  @input: none
@@ -89,7 +93,7 @@ app.use((req, res, next) => {
  @algorithm: clear from the code and comments below. Process first-time run errors to give better diagnstics.
 */
 
-//Kevin 10/27/24, I declare below for https //const PORT = process.env.PORT || 3001;//3000 already in use, why?
+//Kevin 10/27/24, I declare below for https //const PORT = process.env.PORT || 3001;//3000 was already in use, why?
 
 async function startServer() {
   try {

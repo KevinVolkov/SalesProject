@@ -1,13 +1,31 @@
-//const mongoose = require('mongoose');
-//const bcrypt = require('bcryptjs');
-const { DataTypes } = require('sequelize');
+/* 
+Module name: Customer.js
+Date of the code (latest update): 11/21/24
+-----------------------------------------------------------------------------------------------
+Programmer: Kevin Volkov /student, CSUN COMP 380, Group #6/
+-----------------------------------------------------------------------------------------------
+Description: describes DB schema for 'customers' table,  Customer Model
+ * - Represents registered users (customers) and includes their name, email, password, and orders.
+ * - defines custom getter and setter for handling serialized data (orders field).
+ * - defines relationships between customers and orders/cart items.
+ *
+ * Key Fields:
+ * - 'name': The customer's name.
+ * - 'email': The customer's unique email address.
+ * - 'password': The hashed (encrypted) password for login authentication.
+ * - 'orders: A semicolon-separated very long string of orders details.
+ */
+
+//const mongoose = require('mongoose');//I am using  MySQL now, but keep for history
+//const bcrypt = require('bcryptjs');//I do not need this encryption package here
+const { DataTypes } = require('sequelize');//to work with SQL types in DB
 const sequelize = require('../config/db');  // Import the db connection
 
 
 const Customer = sequelize.define('Customer', {
   id: {
     type: DataTypes.INTEGER,
-    primaryKey: true,
+    primaryKey: true,  //this is Primary Key of the "customers" table
     autoIncrement: true
 },
   name: {
@@ -49,7 +67,6 @@ const Customer = sequelize.define('Customer', {
         }
     ]
 });
-
 
 
 module.exports = Customer;

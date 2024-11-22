@@ -1,10 +1,12 @@
-Kevin's comments/history:
+Kevin's comments/history fo KevinBranch
+
+-----------------------------------------------------------------------------------------------------------------
+
+11/21/24 Removed unused files . Put multiple comments to explain algorithms for possible future maintenance.
 
 -----------------------------------------------------------------------------------------------------------------
 
 11/21/24 11:28pm Integrated latest Joaquin's changes for the detailed confirmation email.
-
------------------------------------------------------------------------------------------------------------------
 
 11/20/24 8:12pm Integrated latest Irvin's fixes Restored "Clear Cart" button in /views/cart.ejs again.
 
@@ -50,6 +52,12 @@ please ignore this warning and continue, browser WILL allow it. And:  it is stil
 Also see  howtostartwith_mysql_db.txt file (in the root dir) how to start with MySQL and
 generate "fake" db;
 
-----------------------------------------------------------------------------------------------------
 ABC Sales: Major commit 10/26/24 . Working version with MySQL and Login/Registering customers. Full purchase checkout.
 Still no "admin" functions. 
+
+----------------------------------------------------------------------------------------------------
+
+ABC Sales: Major commit 09/23/24 . Major commit (with some bugs though), but working version with MongoDB 'customers' and 'items' tables
+ 
+----------------------------------------------------------------------------------------------------
+

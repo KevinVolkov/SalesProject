@@ -1,20 +1,50 @@
-const express = require('express');
-const router = express.Router();
-const customerController = require('../controllers/customerController');
+/*
+Module name: customers.js
+Date of the code (latest update): 11/21/24
+-----------------------------------------------------------------------------------------------
+Programmer: Kevin Volkov /student, CSUN COMP 380, Group #6/
+-----------------------------------------------------------------------------------------------
+Description:  Middleware Customer Routes Module for actions performed by or for customers
+* - Defines routes for customer management: registration, login, and logout.
+* - Manages web requests to view and update customer information.
+* - entry point for customer-related controllers.
+*/
 
-const bcrypt = require('bcryptjs');//const bcrypt = require('bcrypt');
-const Customer = require('../models/Customer');
+//import required packages
+const express = require('express');//import package for 'express' apps
+const router = express.Router();//get the router structure/object 
+const customerController = require('../controllers/customerController');//get/import customerController
 
-// Register
+const bcrypt = require('bcryptjs');//for one-way encryptions of passwords in DB const bcrypt = require('bcrypt');
+const Customer = require('../models/Customer');//get the Customer structure as class/type
+
+/* 
+ @function: router.get, setting routing to  rendering the 'register' view
+ @purpose:  setting routing to  rendering the 'register' view
+ @called_from: middlewear route
+ @input: req,res (web request and response structures)
+ @output: none, but rendering the register view
+ @algorithm: GET request `/register` - Registers a new customer.
+*/
 router.get('/register', (req, res) => res.render('register'));
-//router.post('/register', customerController.register);
 
+/* 
+ @function: router.post, setting routing to  register a new customer.
+ @purpose:  setting routing to  'register' function'
+ @called_from: middlewear route
+ @input: req,res (web request and response structures)
+ @output: none, but rendering the login view
+ @algorithm: POST request `/register` - Registers a new customer, see also comments below, it hashes the
+             password before saving the new cucustome's before saving it in the database
+*/
+//router.post('/register', customerController.register);//commented for history: we need the one with params
+//POST `/register` - Registers a new customer.
 router.post('/register', async (req, res) => {
     const { name, email, password, address } = req.body;
 
     try {
         // Check if email already exists
-        //let customer = await Customer.findOne({ email });
+        //let customer = await Customer.findOne({ email });//this worked with MongoDB, by not with MySQL
           let customer = await Customer.findOne({ 
             where: { email } // Proper use of 'where' clause
         });
@@ -46,10 +76,27 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// Login
+
+/* // Login
+ @function: router.get, setting routing to  rendering the login view
+ @purpose:  setting routing to  rendering the 'login' view
+ @called_from: middlewear route
+ @input: req,res (web request and response structures)
+ @output: none, but rendering the login view
+ @algorithm: GET request `/login` - Login  a customer (previousely registered).
+*/
 router.get('/login', (req, res) => res.render('login'));
 
-// Handle login
+
+/*  
+ @function: router.post, setting routing to  login a previousely registred customer.
+ @purpose:  setting routing to  'login' function'
+ @called_from: middlewear route
+ @input: req,res (web request and response structures)
+ @output: none, but rendering the main (index.ejs) view with updated menu "Welcome [user1]"
+ @algorithm: Handle login. POST request '/login' - Login a ustomer, see also comments below, it checks if  the
+             customer has been registred, shows error if not
+*/
 router.post('/login', async (req, res, next) => {
     const { email, password } = req.body;
 
@@ -110,10 +157,15 @@ router.post('/login', async (req, res, next) => {
 });
 
 
-// Logout
-//router.get('/logout', customerController.logout);
-// Logout Route
 
+/* 
+ @function: router.get, setting routing to  logout 
+ @purpose:  setting routing to 'logout' 
+ @called_from: middlewear route
+ @input: req,res (web request and response structures)
+ @output: none, but rendering the updated main view  '/' view (views/index.ejs)
+ @algorithm: GET request '/logout' - logs out the current customer, rendering the main '/' view (views/index.ejs)
+ */
 
 router.get('/logout', (req, res) => {
     req.session.destroy((err) => {
