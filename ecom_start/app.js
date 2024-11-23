@@ -2,7 +2,7 @@
  * Module name: app.js
  *  Date of the code (latest update): 11/21/24
  *  -----------------------------------------------------------------------------------------------
- *  Programmers: Kevin Volkov, Irvin Moreno, Joaquin Banting /students, CSUN COMP 380, Group #6/
+ *  Programmers: Kevin Volkov, Irvin Merino, Joaquin Banting /students, CSUN COMP 380, Group #6/
  * ------------------------------------------------------------------------------------------------
  *  Description:  Main application entry point for our app. 
  * - Sets up and configures the Express server.

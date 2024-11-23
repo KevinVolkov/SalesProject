@@ -1,11 +1,10 @@
 /*    Module name: public/css/styles.css
  *    Date of the code (latest update): 11/21/24
  *    -----------------------------------------------------------------------------------------------
- *    Programmer: Irvin Moreno /student, CSUN COMP 380, Group #6/
+ *    Programmer: Irvin Merino /student, CSUN COMP 380, Group #6/
  *    ------------------------------------------------------------------------------------------------
  *    Description: CSS file which is used in all front-end views to make the web GUI look consistent
  */
-
 
 /* General styles for body */
 body {
@@ -185,6 +184,25 @@ input[type="password"]::placeholder {
 
 .btn:hover {
 	background-color: #3498db;
+	transform: translateY(-2px);
+}
+
+.Clear-cart {
+	display: inline-block;
+	border-style: none;
+	padding: 12px 24px;
+	margin: 10px 0;
+	background-color: #cc0000;
+	color: white;
+	text-decoration: none;
+	border-radius: 38px;
+	text-align: center;
+	font-size: 16px;
+	transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.Clear-cart:hover {
+	background-color: rgb(255, 36, 0);
 	transform: translateY(-2px);
 }
 

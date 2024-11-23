@@ -2,9 +2,12 @@ Kevin's comments/history fo KevinBranch
 
 -----------------------------------------------------------------------------------------------------------------
 
-11/21/24 Removed unused files . Put multiple comments to explain algorithms for possible future maintenance.
+11/23/24 Integrated Irvin's latest fix to the 'Clear Cart' button. Fixed misspelling in Irvin Merino's last
+         name in comments. Sorry.
 
 -----------------------------------------------------------------------------------------------------------------
+
+11/21/24 Removed unused files . Put multiple comments to explain algorithms for possible future maintenance.
 
 11/21/24 11:28pm Integrated latest Joaquin's changes for the detailed confirmation email.
 
