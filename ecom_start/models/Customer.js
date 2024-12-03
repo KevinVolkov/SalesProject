@@ -50,8 +50,18 @@ const Customer = sequelize.define('Customer', {
   orders: {
     type: DataTypes.STRING,
     allowNull: true,
-    get() { return this.getDataValue('orders').split(';')  },
-    set(val) {   this.setDataValue('orders',val.join(';'));  },
+    get() 
+    { 
+      var res=this.getDataValue('orders');
+      if(typeof(res)=="undefined" || res==null) return [];//Kevin for unit test on 11/30/24
+      
+      return this.getDataValue('orders').split(';')  
+
+    },
+    set(val) {  
+      var res=this.getDataValue('orders');
+      if(typeof(res)=="undefined" || res==null) this.setDataValue('orders',val);
+      else                                      this.setDataValue('orders',val.join(';'));  },
   },
   
   isRegistered: {

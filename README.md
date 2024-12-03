@@ -2,10 +2,13 @@ Kevin's comments/history fo KevinBranch
 
 -----------------------------------------------------------------------------------------------------------------
 
+12/02/24 Added Jtest (JavaScript Testing Framework) automated unit tests modules per assignment of 12/02/24
+         latest fixes from Irvin and Joaquin
+	
+-----------------------------------------------------------------------------------------------------------------
+
 11/23/24 Integrated Irvin's latest fix to the 'Clear Cart' button. Fixed misspelling in Irvin Merino's last
          name in comments. Sorry.
-
------------------------------------------------------------------------------------------------------------------
 
 11/21/24 Removed unused files . Put multiple comments to explain algorithms for possible future maintenance.
 
