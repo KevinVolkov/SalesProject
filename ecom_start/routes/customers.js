@@ -18,6 +18,8 @@ const customerController = require('../controllers/customerController');//get/im
 const bcrypt = require('bcryptjs');//for one-way encryptions of passwords in DB const bcrypt = require('bcrypt');
 const Customer = require('../models/Customer');//get the Customer structure as class/type
 
+const { Sequelize } = require('../config/db'); // Import Sequelize for using Op Kevin: 12/13/24 'admin' ops
+
 /* 
  @function: router.get, setting routing to  rendering the 'register' view
  @purpose:  setting routing to  rendering the 'register' view
@@ -58,6 +60,30 @@ router.post('/register', async (req, res) => {
 
         // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
+
+   
+//Kevin start for admin ************ 12/13/24
+const isAdmin = name.toLowerCase() === 'admin';
+
+if(isAdmin)
+{//maybe already there is one admin?, do not allow
+    let customer = await Customer.findOne({
+        where: {
+          name: {
+            [Sequelize.Op.like]: 'admin' // Case-insensitive search using LIKE
+          }
+        }
+      });
+    if (customer) {
+        //return res.status(400).send('Customer with this email already exists.');
+        return res.render('register', { errorMessage: 'Admin already exists!' });//Kevin: error message instead of ugly codes
+        //res.redirect('/register');
+    }
+
+}//Kevin end for admin ************ 12/13/24
+
+
+
 
         // Create a new customer
         customer = new Customer({

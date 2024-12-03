@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin's Add Item</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <%- include('../partials/header') %>
+    <div class="container">
+
+
+
+<h1>Add New Item</h1>
+<form action="/admin/items/add" method="POST">
+    <label for="name">Item Name:</label>
+    <input type="text" name="name" required>
+    <label for="price">Price:</label>
+    <input type="number" name="price" required>
+    <label for="description">Description:</label>
+    <textarea name="description"></textarea>
+
+    <label for="stock">Stock:</label>
+    <textarea name="stock" required></textarea>
+    
+    <label for="itemImage">Upload Image:</label>
+    <input type="file" name="itemImage">
+  
+
+    <button type="submit">Add Item</button>
+</form>
+
+
+</div>
+</body>
+</html>

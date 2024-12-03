@@ -1,12 +1,13 @@
 Kevin's comments/history fo KevinBranch
+-----------------------------------------------------------------------------------------------------------------
+
+12/03/24 Added 'admin' functions. Some more work is needed, probably, if we have time (or not)
 
 -----------------------------------------------------------------------------------------------------------------
 
 12/02/24 Added Jtest (JavaScript Testing Framework) automated unit tests modules per assignment of 12/02/24
          latest fixes from Irvin and Joaquin
 	
------------------------------------------------------------------------------------------------------------------
-
 11/23/24 Integrated Irvin's latest fix to the 'Clear Cart' button. Fixed misspelling in Irvin Merino's last
          name in comments. Sorry.
 

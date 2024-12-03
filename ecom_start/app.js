@@ -262,7 +262,10 @@ app.get('/logout', (req, res) => {
 });
 
 
-
+//Kevin for "admin" 12/03/24 start
+const adminRoutes = require('./routes/admin');
+app.use('/admin', adminRoutes);
+//Kevin for ""admin" 12/03/24 end
 
 /* Kevin Volkov's comment: I now do https , but started from http, keep for history
 app.listen(3000, () => {

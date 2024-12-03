@@ -77,8 +77,28 @@ exports.checkout = async (req, res) => {
         if (cart.length > 0) {
             // If there are items in the cart, you can process them
             // Example: Extracting item names
-            const itemNames = cart.map(item => item.name); // Adjust according to your cart structure
+           // const itemNames = cart.map(item => item.name); // Adjust according to your cart structure
             //console.log('Items in cart:', itemNames);
+                       
+            
+            
+            
+            //Kevin 12/03/24 start ********** saving new orders in db fors  registered (or not)  customer
+            // Prepare the order data
+        const orderData = cart.map(item => ({
+            name: item.name,
+            quantity: item.quantity,
+            price: item.price,
+        }));
+
+        // Append the serialized order data to the customer's orders
+        const existingOrders = customer.orders || [];
+        existingOrders.push(JSON.stringify(orderData));
+
+        // Update the customer's orders in the database
+        customer.orders = existingOrders;
+        await customer.save();
+
 
             //send email here?? //Kevin 10/24/24 10/29/24
 

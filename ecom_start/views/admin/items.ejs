@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin's Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <%- include('../partials/header') %>
+    <div class="container">
+
+
+<h1>Items</h1>
+<a href="/admin/items/add">Add New Item</a>
+<ul>
+    <% items.forEach(item => { %>
+        <li><%= item.name %> - <%= item.price %>
+
+
+            <% 
+            if (item.itemImage) 
+            { %> <img src="/uploads/<%= item.itemImage %>" alt="Image of <%= item.name %>" class="admin-item-image"> <% } 
+            else { %> <p>No image available</p> <% } 
+            %>
+
+
+
+            <form action="/admin/items/delete/<%= item.id %>" method="POST">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+    <% }) %>
+</ul>
+
+
+</div>
+</body>
+</html>

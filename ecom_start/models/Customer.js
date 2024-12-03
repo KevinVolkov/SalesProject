@@ -59,9 +59,10 @@ const Customer = sequelize.define('Customer', {
 
     },
     set(val) {  
-      var res=this.getDataValue('orders');
-      if(typeof(res)=="undefined" || res==null) this.setDataValue('orders',val);
-      else                                      this.setDataValue('orders',val.join(';'));  },
+     /* var res=this.getDataValue('orders');
+      if(typeof(res)=="undefined" || res==null) this.setDataValue('orders',val+""); //unit test
+      else Kevin says: need to work here for correct unit test */
+            this.setDataValue('orders',val.join(';'));  },
   },
   
   isRegistered: {

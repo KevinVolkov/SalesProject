@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin's Customers Management</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <%- include('../partials/header') %>
+    <div class="container">
+
+
+
+<h1>Customers</h1>
+<ul>
+    <% customers.forEach(customer => { %>
+        <li><%= customer.name %> (<%= customer.email %>)
+
+
+            
+
+            <% if (customer.orders && customer.orders.length > 0) { %>
+                <ul>
+                    <% customer.orders.forEach((order, index) => { %>
+                        <li>
+                            <strong>Order <%= index + 1 %>:</strong>
+                            <%= JSON.parse(order).map(item => `${item.name} (x${item.quantity})`).join(', ') %>
+                        </li>
+                    <% }); %>
+                </ul>
+            <% } else { %>
+                <p>No orders yet</p>
+            <% } %>
+
+
+
+
+
+
+
+            <form action="/admin/customers/delete/<%= customer.id %>" method="POST">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+    <% }) %>
+</ul>
+
+
+</div>
+</body>
+</html>
