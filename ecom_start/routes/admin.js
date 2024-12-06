@@ -22,6 +22,18 @@ const Item = require('../models/Item');
 const Customer = require('../models/Customer');
 
 
+
+/* 
+ @function: isAdmin
+ @purpose:  checking if a customer is 'admin', allow or deny access
+ @called_from: middleweare route
+ @input: req,res,next (web request and response structures)
+ @output: none, but redirecting to next view
+ @algorithm: customer is 'admin' if it's name is 'admin'. 
+             explanation: Only one 'admin' is allowed in the system
+*/
+
+
 // Middleware to check if the user is "admin"
 function isAdmin(req, res, next) {
     if (req.session.customer && req.session.customer.name === 'admin') {
@@ -36,6 +48,15 @@ router.get('/dashboard', isAdmin, (req, res) => {
     res.render('admin/dashboard'); // Create a dashboard view for admin operations
 }); */
 
+/* 
+ @function: router.get('/dashboard'...
+ @purpose:  Admin dashboard route
+ @called_from: middleweare route
+ @input: req,res,(web request and response structures)
+ @output: none, but redirecting to next view (depending if the customer is 'admin')
+ @algorithm: customer is 'admin' if it's name is 'admin'. 
+             explanation: Only one 'admin' is allowed in the system
+*/
 // Ensure this route is only accessible by admin
 router.get('/dashboard', (req, res) => {
     if (req.session.customer && req.session.customer.name === 'admin') {
@@ -50,10 +71,21 @@ router.get('/dashboard', (req, res) => {
 
 
 // View all items
+/* 
+ @function: router.get('/items'
+ @purpose:  Admin dashboard route to '/items'
+ @called_from: middleweare route
+ @input: req,res,(web request and response structures)
+ @output: none, but redirecting to admin/items'
+ @algorithm: redirecting to View all items 
+*/
 router.get('/items', isAdmin, async (req, res) => {
     const items = await Item.findAll();
     res.render('admin/items', { items });
 });
+
+
+//The description of other functions is simillar to the above and obvious
 
 // Add an item (form)
 router.get('/items/add', isAdmin, (req, res) => {

@@ -1,39 +1,47 @@
+<!-- 
+Module name: /views/admin/items.ejs
+Date of the code (latest update): 12/06/24
+-----------------------------------------------------------------------------------------------
+Programmers: Kevin Volkov,  Irvin Merino, Joaquin Banting /students, CSUN COMP 380, Group #6/
+-----------------------------------------------------------------------------------------------
+Description: this module lists all items in the inventory along with their details and images.
+- Enables the 'admin' to view, delete, and add items from the inventory.
+- Displays items information such as name, price, description, and stock status.
+-->
+
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin's Dashboard</title>
-    <link rel="stylesheet" href="/css/styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
     <%- include('../partials/header') %>
     <div class="container">
+      <h1>Items</h1>
+      <a class="add-new-item" href="/admin/items/add">Add New Item</a>
+      <ul class="results-list">
+        <% items.forEach(item => { %>
+        <li class="result-item">
+          <%= item.name %> - <%= item.price %> <% if (item.itemImage) { %>
+          <img
+            src="/uploads/<%= item.itemImage %>"
+            alt="Image of <%= item.name %>"
+            class="admin-item-image"
+          />
+          <% } else { %>
+          <p>No image available</p>
+          <% } %>
 
-
-<h1>Items</h1>
-<a href="/admin/items/add">Add New Item</a>
-<ul>
-    <% items.forEach(item => { %>
-        <li><%= item.name %> - <%= item.price %>
-
-
-            <% 
-            if (item.itemImage) 
-            { %> <img src="/uploads/<%= item.itemImage %>" alt="Image of <%= item.name %>" class="admin-item-image"> <% } 
-            else { %> <p>No image available</p> <% } 
-            %>
-
-
-
-            <form action="/admin/items/delete/<%= item.id %>" method="POST">
-                <button type="submit">Delete</button>
-            </form>
+          <form action="/admin/items/delete/<%= item.id %>" method="POST">
+            <input type="submit" value="Delete" />
+          </form>
         </li>
-    <% }) %>
-</ul>
-
-
-</div>
-</body>
+        <% }) %>
+      </ul>
+    </div>
+  </body>
 </html>

@@ -1,3 +1,14 @@
+<!-- 
+Module name: /views/admin/additem.ejs
+Date of the code (latest update): 12/06/24
+-----------------------------------------------------------------------------------------------
+Programmers: Kevin Volkov,  Irvin Merino, Joaquin Banting /students, CSUN COMP 380, Group #6/
+-----------------------------------------------------------------------------------------------
+Description: This module provides an interface for the admin to add new items to the inventory. 
+- Allows admins to input item details such as name, description, price, stock and upload (optionally) an image.
+- Allows the creation (by admin) of new products in the database.
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,12 +28,13 @@
     <label for="name">Item Name:</label>
     <input type="text" name="name" required>
     <label for="price">Price:</label>
-    <input type="number" name="price" required>
+    <input type="number" name="price" min="1" step="any" required> <!-- min and step to allow fractions  -->
     <label for="description">Description:</label>
     <textarea name="description"></textarea>
 
     <label for="stock">Stock:</label>
-    <textarea name="stock" required></textarea>
+    <input type="number" name="stock" min="1" required>
+    <!-- <textarea name="stock" required></textarea>  Kevin: do not allow non-numbers crashes!!!-->
     
     <label for="itemImage">Upload Image:</label>
     <input type="file" name="itemImage">

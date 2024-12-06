@@ -1,9 +1,13 @@
 Kevin's comments/history fo KevinBranch
+
+-----------------------------------------------------------------------------------------------------------------
+
+12/06/24 Integrated latest Irvin's fixes for admin functions (not in ../additem.ejs - there was some crash 
+         when adding an item)
+
 -----------------------------------------------------------------------------------------------------------------
 
 12/03/24 Added 'admin' functions. Some more work is needed, probably, if we have time (or not)
-
------------------------------------------------------------------------------------------------------------------
 
 12/02/24 Added Jtest (JavaScript Testing Framework) automated unit tests modules per assignment of 12/02/24
          latest fixes from Irvin and Joaquin

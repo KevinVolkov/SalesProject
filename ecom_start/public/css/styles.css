@@ -108,7 +108,9 @@ label {
 /* General styling for all input fields (email, text, password) */
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="number"],
+input[type="stock"] {
 	width: 100%;
 	padding: 12px;
 	margin-bottom: 20px;
@@ -123,7 +125,9 @@ input[type="password"] {
 /* Focus state */
 input[type="text"]:focus,
 input[type="email"]:focus,
-input[type="password"]:focus {
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="stock"]:focus {
 	border-color: rgb(91, 202, 238);
 	background-color: #fff; /* Lighter background on focus */
 	outline: none;
@@ -132,7 +136,9 @@ input[type="password"]:focus {
 /* Hover effect */
 input[type="text"]:hover,
 input[type="email"]:hover,
-input[type="password"]:hover {
+input[type="password"]:hover,
+input[type="number"]:hover,
+input[type="stock"]:hover {
 	border-color: #bbb;
 	background-color: #f1f1f1;
 }
@@ -140,7 +146,9 @@ input[type="password"]:hover {
 /* Placeholder Styling */
 input[type="text"]::placeholder,
 input[type="email"]::placeholder,
-input[type="password"]::placeholder {
+input[type="password"]::placeholder,
+input[type="number"]::placeholder,
+input[type="stock"]::placeholder {
 	color: #8a8a8a;
 	font-style: italic;
 }
@@ -322,10 +330,33 @@ input[type="password"]::placeholder {
 }
 
 /* Kevin for Pictures start */
-.search-item-image {
+.search-item-image,
+.admin-item-image {
 	width: 75px;
 	float: right;
 	margin-left: 15px;
+}
+
+.add-new-item{
+	background-color: #2980b9; /* Blue color */
+	color: white;
+	text-decoration: none;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 38px;
+	font-size: 16px;
+	cursor: pointer;
+	display: inline-block;
+	
+	margin: 20px;
+	transition: background-color 0.3s ease, box-shadow 0.3s ease;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.add-new-item:hover {
+	background-color: #3498db;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+	transform: translateY(-2px); /* Subtle lift effect on hover */
 }
 
 .cart-item-image {
@@ -346,3 +377,30 @@ input[type="password"]::placeholder {
 	border-radius: 38;
 }
 /* Kevin for pictures end */
+
+/* Manage buttons*/
+.Manage-buttons {
+	list-style: none;
+	display: flex;
+	margin-top: 50px;
+	justify-content: center;
+	margin-right: 45px;
+	gap: 15px;
+}
+
+.Manage-buttons li a {
+	color: white;
+	background-color: #2980b9;
+	text-decoration: none;
+	padding: 10px 15px;
+	border-radius: 38px;
+	font-weight: bold;
+	text-align: center;
+	transition: background-color 0.3s ease, box-shadow 0.3s ease;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+.Manage-buttons li a:hover {
+	background-color: #3498db;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+	transform: translateY(-2px); /* Subtle lift effect on hover */
+}
