@@ -48,8 +48,8 @@ const Customer = sequelize.define('Customer', {
   //  https://stackoverflow.com/questions/63335865/sequelize-error-on-datatypes-arraydatatypes-string
   //  https://stackoverflow.com/questions/41860792/how-can-i-have-a-datatype-of-array-in-mysql-sequelize-instance
   orders: {
-    type: DataTypes.STRING,
-    allowNull: true,
+    type: DataTypes.STRING(8192),//type: DataTypes.STRING(16383), //Kevin 12/07/24 the string must be very long to allow huge order strings (multiple orders)
+    allowNull: true,  //later think about BLOB or TEXT wwith  65,535
     get() 
     { 
       var res=this.getDataValue('orders');

@@ -106,9 +106,12 @@ exports.checkout = async (req, res) => {
             // to add it to make the email more detailed. Kevin 11/21/24 : done by Joaquin
 
             // Calculate the total price 11/14/24
-            const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            const total = (cart.reduce((sum, item) => sum + item.price * item.quantity, 0)).toFixed(2);
             // Extract the last 4 digits of the credit card 11/14/24
             const last4Digits = creditCard.slice(-4); 
+
+            console.log("about to send email in orderController, total="+total+" 4digits="+last4Digits);//12/07/24
+
             await sendConfirmationEmail(email,name,address,cart,total,last4Digits); // Kevin 10/29/24,  see this line
            //await sendConfirmationEmail(email,name,address); // Kevin 10/29/24, see this line
            console.log('Email has been sent:');

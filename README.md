@@ -2,10 +2,17 @@ Kevin's comments/history fo KevinBranch
 
 -----------------------------------------------------------------------------------------------------------------
 
-12/06/24 Integrated latest Irvin's fixes for admin functions (not in ../additem.ejs - there was some crash 
-         when adding an item)
+12/07/24 Fixed bugs: 1. Orders string was too small in DB for multiple orders (../models/Customer.js). 
+                        DB schema changed, deleteing previous 'ecommercedb' is required before next run.
+                     2. Confirmation email should show the total with only 2 digits after '.' 
+					    (../controllers/orderController.js)
+         Added "shipping method" to the checkout view: it was requirement of the assignment.  
+		 (../views/checkout.ejs and ..public/css/styles.css)
 
 -----------------------------------------------------------------------------------------------------------------
+
+12/06/24 Integrated latest Irvin's fixes for admin functions (not in ../additem.ejs - there was some crash 
+         when adding an item)
 
 12/03/24 Added 'admin' functions. Some more work is needed, probably, if we have time (or not)
 
